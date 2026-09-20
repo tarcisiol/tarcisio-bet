@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarcisio BET - Painel do Usuário</title>
+    <link rel="icon" type="image/png" href="navegador.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ESTILOS EXCLUSIVOS DO PAINEL DO USUÁRIO */
+        .bar-usuario {
+            background-color: #0a0a0a;
+            border: 1px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 1100px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.15);
+        }
+
+        .info-usuario h3 {
+            color: #ffffff;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .info-usuario p {
+            color: #aaaaaa;
+            font-size: 14px;
+        }
+
+        .saldo-box {
+            background-color: #121212;
+            border: 1px solid #333333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .saldo-box label {
+            display: block;
+            font-size: 12px;
+            color: #aaaaaa;
+            text-transform: uppercase;
+        }
+
+        .saldo-box span {
+            font-size: 22px;
+            font-weight: bold;
+            color: #00ff00;
+        }
+
+        .btn-deposito-rapido {
+            background-color: #00ff00 !important;
+            color: #000000 !important;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: 0.2s;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+        }
+
+        .btn-deposito-rapido:hover {
+            background-color: #00cc00 !important;
+            transform: scale(1.03);
+        }
+
+        /* SEÇÃO DE JOGOS & DEMO */
+        .jogos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1100px;
+            margin: 20px auto 40px auto;
+        }
+
+        .card-jogo {
+            background-color: #0a0a0a;
+            border: 1px solid #222222;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .card-jogo:hover {
+            border-color: #00ff00;
+        }
+
+        .card-jogo h4 {
+            color: #00ff00;
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .card-jogo p {
+            font-size: 13px;
+            color: #cccccc;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+
+        .botoes-jogo {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-demo {
+            background-color: #222222;
+            color: #ffffff;
+            border: 1px solid #444444;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .btn-demo:hover {
+            background-color: #333333;
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .btn-jogar-real {
+            background-color: #00ff00;
+            color: #000000;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        /* TABELA DE JOGOS AO VIVO */
+        .tabela-apostas {
+            max-width: 1100px;
+            margin: 20px auto;
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #0a0a0a;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #222222;
+        }
+
+        .tabela-apostas th, .tabela-apostas td {
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid #222222;
+            font-size: 14px;
+        }
+
+        .tabela-apostas th {
+            background-color: #121212;
+            color: #00ff00;
+            text-transform: uppercase;
+        }
+
+        .btn-odd {
+            background-color: #003300;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-odd:hover {
+            background-color: #00ff00;
+            color: #000000;
+        }
+
+        @media (max-width: 850px) {
+            .jogos-grid {
+                grid-template-columns: 1fr;
+            }
+            .bar-usuario {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="dashboard.html">
+                <img src="logo da bet.png" alt="Logo Tarcisio BET">
+            </a>
+        </div>
+        
+        <nav class="menu-navegacao">
+            <a class="btn-inicio" href="dashboard.html">Painel</a>
+            <a class="btn-inicio" href="pagamento.html">Depositar</a>
+            <a class="btn-inicio" href="suporte.html">Suporte</a>
+            <a class="btn-inicio" href="pag principal.html" style="color: #ff3333 !important;">Sair</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <!-- BARRA DO USUÁRIO LOGADO -->
+        <section class="bar-usuario">
+            <div class="info-usuario">
+                <h3 id="nome_boas_vindas">Bem-vindo(a) à plataforma! 👋</h3>
+                <p>Sua conta está ativa. Explore os jogos ou faça seu primeiro depósito.</p>
+            </div>
+
+            <div class="saldo-box">
+                <label>Saldo Atual</label>
+                <span>R$ 0,00</span>
+            </div>
+
+            <a href="pagamento.html" class="btn-deposito-rapido">⚡ Depositar Agora</a>
+        </section>
+
+        <!-- APOSTAS ESPORTIVAS EM DESTAQUE -->
+        <h3 class="titulo-secao">⚽ Partidas em Destaque (Ao Vivo)</h3>
+        
+        <table class="tabela-apostas">
+            <thead>
+                <tr>
+                    <th>Partida</th>
+                    <th>Casa (1)</th>
+                    <th>Empate (X)</th>
+                    <th>Fora (2)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Flamengo vs Palmeiras</td>
+                    <td><button class="btn-odd" onclick="alertaDeposito()">2.10</button></td>
+                    <td><button class="btn-odd" onclick="alertaDeposito()">3.20</button></td>
+                    <td><button class="btn-odd" onclick="alertaDeposito()">2.85</button></td>
+                </tr>
+                <tr>
+                    <td>Real Madrid vs Barcelona</td>
+                    <td><button class="btn-odd" onclick="alertaDeposito()">1.95</button></td>
+                    <td><button class="btn-odd" onclick="alertaDeposito()">3.50</button></td>
+                    <td><button class="btn-odd" onclick="alertaDeposito()">3.10</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- JOGOS DE CASSINO / SLOTS -->
+        <h3 class="titulo-secao">🎰 Cassino & Modos Demo</h3>
+
+        <div class="jogos-grid">
+            <div class="card-jogo">
+                <h4>Tiger Fortune</h4>
+                <p>Multiplicadores de até 500x. Teste a versão demonstrativa sem gastar nada.</p>
+                <div class="botoes-jogo">
+                    <button class="btn-demo" onclick="abrirDemo('Tiger Fortune')">🎮 Jogar Demo</button>
+                    <button class="btn-jogar-real" onclick="alertaDeposito()">💰 Valendo Dinheiro</button>
+                </div>
+            </div>
+
+            <div class="card-jogo">
+                <h4>Aviator Crash</h4>
+                <p>Decole e retire sua aposta antes do avião voar para longe.</p>
+                <div class="botoes-jogo">
+                    <button class="btn-demo" onclick="abrirDemo('Aviator Crash')">🎮 Jogar Demo</button>
+                    <button class="btn-jogar-real" onclick="alertaDeposito()">💰 Valendo Dinheiro</button>
+                </div>
+            </div>
+
+            <div class="card-jogo">
+                <h4>Roleta VIP</h4>
+                <p>Roleta europeia clássica com sorteios em tempo real.</p>
+                <div class="botoes-jogo">
+                    <button class="btn-demo" onclick="abrirDemo('Roleta VIP')">🎮 Jogar Demo</button>
+                    <button class="btn-jogar-real" onclick="alertaDeposito()">💰 Valendo Dinheiro</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>© Tarcisio BET. Aposte com responsabilidade. Proibido para menores de 18 anos.</p>
+    </footer>
+
+    <script>
+        // Pega o nome vindo do formulário de cadastro via URL (opcional)
+        const params = new URLSearchParams(window.location.search);
+        const nome = params.get('nome');
+        if (nome) {
+            document.getElementById('nome_boas_vindas').textContent = `Bem-vindo(a), ${nome}! 👋`;
+        }
+
+        // Função ao clicar em apostar com saldo zero
+        function alertaDeposito() {
+            if (confirm("Você precisa de saldo para apostar valendo dinheiro real.\nDeseja ir para a página de depósito agora?")) {
+                window.location.href = "pagamento.html";
+            }
+        }
+
+        // Modo treino (Demo)
+        function abrirDemo(nomeJogo) {
+            alert(`Iniciando modo demonstrativo do jogo: ${nomeJogo}.\n\n(Neste modo você joga com moedas fictícias para testar!)`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarcisio BET - Cadastro</title>
+    
+    <!-- ÍCONE DA ABA DO NAVEGADOR -->
+    <link rel="icon" type="image/png" href="navegador.png">
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* RESET E COR DO FUNDO DA PÁGINA TOTALMENTE PRETO */
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 15px 0;
+        }
+
+        /* Centraliza a logo no topo */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+
+        .logo-container img {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Centraliza a navegação logo abaixo da logo */
+        .menu-navegacao {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+
+        .btn-inicio {
+            color: #ffffff !important;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: 0.2s;
+            font-size: 16px;
+        }
+
+        .btn-inicio:hover {
+            color: #00ff00 !important;
+            background-color: #111111 !important;
+        }
+
+        /* CAIXA DO CADASTRO RESPONSIVA */
+        .caixa-cadastro {
+            background-color: #0a0a0a !important;
+            border: 1px solid #00ff00 !important;
+            border-radius: 12px;
+            padding: 25px 20px;
+            width: 92%;
+            max-width: 520px;
+            margin: 25px auto;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.15);
+        }
+
+        .caixa-cadastro h1 {
+            margin-top: 0;
+            text-align: center;
+            color: #00ff00 !important;
+            text-transform: uppercase;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        /* ESTILIZAÇÃO DOS CAMPOS DE TEXTO E SELECT */
+        .label-campo {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #cccccc !important;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #121212 !important;
+            border: 1px solid #333333 !important;
+            border-radius: 6px;
+            color: #ffffff !important;
+            font-size: 15px;
+            margin-bottom: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #00ff00 !important;
+        }
+
+        /* CHECKBOX DE TERMOS */
+        .container-termos {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0 20px 0;
+            font-size: 14px;
+            color: #cccccc;
+        }
+
+        .container-termos input[type="checkbox"] {
+            accent-color: #00ff00;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .container-termos a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+
+        .container-termos a:hover {
+            text-decoration: underline;
+        }
+
+        /* MENSAGEM DE ERRO */
+        .mensagem-erro {
+            color: #ff3333;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #222222 !important;
+            margin: 20px 0;
+        }
+
+        /* BOTÃO CONFIRMAR */
+        button[type="submit"] {
+            width: 100%;
+            background-color: #00ff00 !important;
+            color: #000000 !important;
+            border: none !important;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #00cc00 !important;
+            transform: scale(1.01);
+            box-shadow: 0 0 12px rgba(0, 255, 0, 0.4);
+        }
+
+        /* AJUSTES PARA DISPOSITIVOS PEQUENOS */
+        @media (max-width: 400px) {
+            .caixa-cadastro {
+                padding: 20px 12px;
+            }
+
+            .btn-inicio {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+
+            .caixa-cadastro h1 {
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="pag principal.html"><img src="logo da bet.png" alt="Logo Tarcisio BET"></a>
+        </div>
+        
+        <nav class="menu-navegacao">
+            <a class="btn-inicio" href="pag principal.html">Início</a>
+            <a class="btn-inicio" href="forms.html">Cadastre-se</a>
+            <a class="btn-inicio" href="suporte.html">Suporte</a>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="caixa-cadastro">
+            <h1>Criar Nova Conta</h1>
+            
+            <form id="form_cadastro" action="dashboard.html" method="GET">
+
+                <label class="label-campo" for="campo_nome">Nome:</label>
+                <input id="campo_nome" name="nome" type="text" placeholder="Digite seu nome" required>
+
+                <label class="label-campo" for="campo_sobrenome">Sobrenome:</label>
+                <input id="campo_sobrenome" name="sobrenome" type="text" placeholder="Digite seu sobrenome" required>
+
+                <label class="label-campo" for="campo_cpf">CPF:</label>
+                <input id="campo_cpf" name="cpf" type="text" placeholder="000.000.000-00" maxlength="14" required>
+
+                <label class="label-campo" for="campo_data">Data de Nascimento:</label>
+                <input id="campo_data" name="data_nascimento" type="text" placeholder="DD/MM/AAAA" maxlength="10" required>
+                <div id="erro_idade" class="mensagem-erro">🚫 Você precisa ter 18 anos ou mais para se cadastrar.</div>
+
+                <label class="label-campo" for="campo_email">E-mail:</label>
+                <input id="campo_email" name="email" type="email" placeholder="Digite seu e-mail" required>
+
+                <label class="label-campo" for="campo_senha">Senha:</label>
+                <input id="campo_senha" name="senha" type="password" placeholder="Digite sua senha" required>
+
+                <label class="label-campo" for="campo_confirmar_senha">Confirmar Senha:</label>
+                <input id="campo_confirmar_senha" name="confirmar_senha" type="password" placeholder="Confirme sua senha" required>
+                <div id="erro_senha" class="mensagem-erro">🚫 As senhas não coincidem.</div>
+
+                <!-- BLOCO CORRIGIDO COM APENAS UMA CAIXINHA -->
+                <div class="container-termos">
+                    <input type="checkbox" id="termos" name="termos" required>
+                    <label for="termos">
+                        Li e aceito os <a href="termos e condições.html" style="color: #00ff00; text-decoration: underline;" target="_blank">Termos e Condições</a>
+                    </label>
+                </div>
+
+                <button type="submit">Finalizar Cadastro</button>    
+            </form>
+        </div>
+    </main>
+
+    <!-- SCRIPTS DE MÁSCARAS E VALIDAÇÕES -->
+    <script>
+        const campoData = document.getElementById('campo_data');
+        const campoCPF = document.getElementById('campo_cpf');
+        const campoSenha = document.getElementById('campo_senha');
+        const campoConfirmarSenha = document.getElementById('campo_confirmar_senha');
+        const formCadastro = document.getElementById('form_cadastro');
+        const erroIdade = document.getElementById('erro_idade');
+        const erroSenha = document.getElementById('erro_senha');
+
+        // Máscara CPF (000.000.000-00)
+        campoCPF.addEventListener('input', (e) => {
+            let valor = e.target.value.replace(/\D/g, '');
+            if (valor.length > 11) valor = valor.slice(0, 11);
+
+            valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+            valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+            valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+            e.target.value = valor;
+        });
+
+        // Máscara DD/MM/AAAA
+        campoData.addEventListener('input', (e) => {
+            let valor = e.target.value.replace(/\D/g, '');
+            if (valor.length > 8) valor = valor.slice(0, 8);
+
+            if (valor.length > 4) {
+                e.target.value = valor.replace(/^(\d{2})(\d{2})(\d{0,4})/, '$1/$2/$3');
+            } else if (valor.length > 2) {
+                e.target.value = valor.replace(/^(\d{2})(\d{0,2})/, '$1/$2');
+            } else {
+                e.target.value = valor;
+            }
+
+            erroIdade.style.display = 'none';
+            campoData.style.borderColor = '#333333';
+        });
+
+        // Oculta erro de senha ao digitar
+        campoConfirmarSenha.addEventListener('input', () => {
+            erroSenha.style.display = 'none';
+            campoConfirmarSenha.style.borderColor = '#333333';
+        });
+
+        // Validações no Envio
+        formCadastro.addEventListener('submit', (e) => {
+            let formValido = true;
+
+            // 1. Validação de Senhas
+            if (campoSenha.value !== campoConfirmarSenha.value) {
+                e.preventDefault();
+                erroSenha.style.display = 'block';
+                campoConfirmarSenha.style.borderColor = '#ff3333';
+                campoConfirmarSenha.focus();
+                formValido = false;
+            }
+
+            // 2. Validação de Idade (Maior de 18)
+            const dataTexto = campoData.value;
+            const partes = dataTexto.split('/');
+
+            if (partes.length === 3) {
+                const dia = parseInt(partes[0], 10);
+                const mes = parseInt(partes[1], 10) - 1;
+                const ano = parseInt(partes[2], 10);
+
+                const dataNascimento = new Date(ano, mes, dia);
+                const hoje = new Date();
+
+                let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+                const m = hoje.getMonth() - dataNascimento.getMonth();
+
+                if (m < 0 || (m === 0 && hoje.getDate() < dataNascimento.getDate())) {
+                    idade--;
+                }
+
+                if (isNaN(idade) || idade < 18) {
+                    e.preventDefault();
+                    erroIdade.style.display = 'block';
+                    campoData.style.borderColor = '#ff3333';
+                    if (formValido) campoData.focus();
+                }
+            } else {
+                e.preventDefault();
+                erroIdade.textContent = '🚫 Por favor, digite uma data válida (DD/MM/AAAA).';
+                erroIdade.style.display = 'block';
+                campoData.style.borderColor = '#ff3333';
+                if (formValido) campoData.focus();
+            }
+        });
+    </script>
+
+</body>
+</html>

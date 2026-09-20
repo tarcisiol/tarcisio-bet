@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarcisio BET - Jogos & Demos</title>
+    <link rel="icon" type="image/png" href="navegador.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            font-family: Arial, sans-serif;
+            padding-bottom: 40px;
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 15px 10px 5px 10px;
+        }
+
+        .logo-container img {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+        }
+
+        .menu-navegacao {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+
+        .btn-inicio {
+            color: #ffffff !important;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: 0.2s;
+            font-size: 15px;
+        }
+
+        .btn-inicio:hover {
+            color: #00ff00 !important;
+            background-color: #111111 !important;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #222222 !important;
+            margin: 15px 0;
+        }
+
+        /* BANNER DO MODO DEMO */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .banner-demo {
+            background: linear-gradient(135deg, #052005 0%, #0a0a0a 100%);
+            border: 1px solid #00ff00;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .banner-demo h2 {
+            color: #00ff00;
+            font-size: 22px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .banner-demo p {
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        .badge-demo {
+            background-color: #00ff00;
+            color: #000000;
+            padding: 6px 14px;
+            font-weight: bold;
+            border-radius: 20px;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        /* FILTROS DE CATEGORIA */
+        .categorias-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .btn-cat {
+            background-color: #121212;
+            border: 1px solid #333333;
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .btn-cat.ativo, .btn-cat:hover {
+            border-color: #00ff00;
+            color: #00ff00;
+            background-color: #002200;
+        }
+
+        /* GRID DE JOGOS */
+        .grid-jogos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card-jogo {
+            background-color: #0a0a0a;
+            border: 1px solid #222222;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-jogo:hover {
+            transform: translateY(-5px);
+            border-color: #00ff00;
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
+        }
+
+        .capa-jogo {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tag-modalidade {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .icone-play {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 255, 0, 0.85);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+
+        .card-jogo:hover .icone-play {
+            opacity: 1;
+        }
+
+        .info-jogo {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .info-jogo h3 {
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .info-jogo p {
+            font-size: 12px;
+            color: #aaaaaa;
+            margin-bottom: 15px;
+        }
+
+        .botoes-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn-play-demo {
+            background-color: #1a1a1a;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .btn-play-demo:hover {
+            background-color: #00ff00;
+            color: #000000;
+        }
+
+        .btn-play-real {
+            background-color: #00ff00;
+            color: #000000;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .btn-play-real:hover {
+            background-color: #00cc00;
+        }
+
+        /* MODAL POPUP DO JOGO DEMO */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 15px;
+        }
+
+        .modal-overlay.ativo {
+            display: flex;
+        }
+
+        .modal-container {
+            background-color: #0d0d0d;
+            border: 2px solid #00ff00;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 700px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            background-color: #141414;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .modal-header h3 {
+            color: #00ff00;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-header h3 span {
+            background: #00ff00;
+            color: #000;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .btn-fechar {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .btn-fechar:hover {
+            color: #ff3333;
+        }
+
+        .modal-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #050505;
+        }
+
+        .game-screen {
+            width: 100%;
+            height: 320px;
+            background-color: #111;
+            border-radius: 8px;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-controls {
+            width: 100%;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #121212;
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: 1px solid #222;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .saldo-demo {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .saldo-demo strong {
+            color: #00ff00;
+            font-size: 16px;
+        }
+
+        /* PAINEL DE VALOR DA APOSTA */
+        .aposta-input-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #000;
+            border: 1px solid #00ff00;
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        .aposta-input-box label {
+            color: #aaa;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .aposta-input-box input {
+            background: transparent;
+            border: none;
+            color: #00ff00;
+            font-size: 15px;
+            font-weight: bold;
+            width: 80px;
+            outline: none;
+        }
+
+        .btn-acao-demo {
+            background-color: #00ff00;
+            color: #000;
+            border: none;
+            padding: 10px 25px;
+            font-weight: bold;
+            font-size: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .btn-acao-demo:hover {
+            background-color: #00cc00;
+            transform: scale(1.03);
+        }
+
+        /* ESTILOS DE JOGOS */
+        .slots-grid {
+            display: flex;
+            gap: 15px;
+        }
+
+        .reel {
+            width: 70px;
+            height: 90px;
+            background: #222;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            box-shadow: inset 0 0 10px #000;
+        }
+
+        .roleta-box {
+            font-size: 60px;
+            font-weight: bold;
+            color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="dashboard.html"><img src="logo da bet.png" alt="Logo Tarcisio BET"></a>
+        </div>
+        
+        <nav class="menu-navegacao">
+            <a class="btn-inicio" href="dashboard.html">Painel</a>
+            <a class="btn-inicio" href="jogos.html" style="color: #00ff00 !important;">Jogos</a>
+            <a class="btn-inicio" href="pagamento.html">Depositar</a>
+            <a class="btn-inicio" href="suporte.html">Suporte</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main class="container">
+        
+        <!-- BANNER MODOS DEMO -->
+        <div class="banner-demo">
+            <div>
+                <h2>🎮 Modo Demonstrativo Habilitado</h2>
+                <p>Experimente todos os nossos jogos com saldo fictício de <strong>R$ 1.000,00</strong> para treinar antes de apostar valendo dinheiro!</p>
+            </div>
+            <span class="badge-demo">Saldo Demo Grátis</span>
+        </div>
+
+        <!-- FILTROS DE JOGO -->
+        <div class="categorias-bar">
+            <button class="btn-cat ativo" onclick="filtrar('todos')">🔥 Todos os Jogos</button>
+            <button class="btn-cat" onclick="filtrar('slots')">🎰 Slots / Fortune</button>
+            <button class="btn-cat" onclick="filtrar('crash')">🚀 Crash Games</button>
+            <button class="btn-cat" onclick="filtrar('cassino')">🎲 Cassino ao Vivo</button>
+        </div>
+
+        <!-- GRID DE JOGOS -->
+        <div class="grid-jogos" id="grid_jogos">
+            
+            <!-- FORTUNE TIGER -->
+            <div class="card-jogo" data-categoria="slots">
+                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), radial-gradient(circle, #ff9900 0%, #330000 100%);">
+                    <span class="tag-modalidade">Slots</span>
+                    <div class="icone-play" onclick="abrirModalDemo('tiger')">▶</div>
+                </div>
+                <div class="info-jogo">
+                    <h3>Fortune Tiger</h3>
+                    <p>O jogo do Tigre! Multiplicadores e bônus incríveis em cada rodada.</p>
+                    <div class="botoes-card">
+                        <button class="btn-play-demo" onclick="abrirModalDemo('tiger')">🎮 Testar Demo</button>
+                        <button class="btn-play-real" onclick="alertaSemSaldo()">💰 Jogar Real</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AVIATOR -->
+            <div class="card-jogo" data-categoria="crash">
+                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), radial-gradient(circle, #ff0055 0%, #220000 100%);">
+                    <span class="tag-modalidade">Crash Game</span>
+                    <div class="icone-play" onclick="abrirModalDemo('aviator')">▶</div>
+                </div>
+                <div class="info-jogo">
+                    <h3>Aviator Crash</h3>
+                    <p>Decole o avião e retire seus lucros antes que ele voe longe!</p>
+                    <div class="botoes-card">
+                        <button class="btn-play-demo" onclick="abrirModalDemo('aviator')">🎮 Testar Demo</button>
+                        <button class="btn-play-real" onclick="alertaSemSaldo()">💰 Jogar Real</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROLETA VIP -->
+            <div class="card-jogo" data-categoria="cassino">
+                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), radial-gradient(circle, #00cc66 0%, #002200 100%);">
+                    <span class="tag-modalidade">Roleta</span>
+                    <div class="icone-play" onclick="abrirModalDemo('roleta')">▶</div>
+                </div>
+                <div class="info-jogo">
+                    <h3>Roleta Europeia VIP</h3>
+                    <p>Aposte no vermelho, preto ou em números da sorte com alta precisão.</p>
+                    <div class="botoes-card">
+                        <button class="btn-play-demo" onclick="abrirModalDemo('roleta')">🎮 Testar Demo</button>
+                        <button class="btn-play-real" onclick="alertaSemSaldo()">💰 Jogar Real</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORTUNE OX -->
+            <div class="card-jogo" data-categoria="slots">
+                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), radial-gradient(circle, #cc9900 0%, #1a1000 100%);">
+                    <span class="tag-modalidade">Slots</span>
+                    <div class="icone-play" onclick="abrirModalDemo('tiger')">▶</div>
+                </div>
+                <div class="info-jogo">
+                    <h3>Fortune Ox</h3>
+                    <p>O jogo do Touro! Recursos de giros repetidos até você ganhar.</p>
+                    <div class="botoes-card">
+                        <button class="btn-play-demo" onclick="abrirModalDemo('tiger')">🎮 Testar Demo</button>
+                        <button class="btn-play-real" onclick="alertaSemSaldo()">💰 Jogar Real</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- MODAL DO SIMULADOR DEMO -->
+    <div class="modal-overlay" id="modal_demo">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modal_titulo">Modo Demo <span>FICTÍCIO</span></h3>
+                <button class="btn-fechar" onclick="fecharModalDemo()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="game-screen" id="tela_jogo"></div>
+
+                <div class="demo-controls">
+                    <div class="saldo-demo">
+                        Saldo Demo: <strong id="saldo_demo_val">R$ 1.000,00</strong>
+                    </div>
+
+                    <div class="aposta-input-box">
+                        <label for="val_aposta">Aposta R$:</label>
+                        <input type="number" id="val_aposta" value="10" min="1" step="1" oninput="atualizarTextoBotao()">
+                    </div>
+
+                    <button class="btn-acao-demo" id="btn_acao_jogo">GIRAR / APOSTAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let saldoDemo = 1000;
+        let rodandoAviator = false;
+        let tipoJogoAtual = '';
+
+        function alertaSemSaldo() {
+            if (confirm("Você não possui saldo real para jogar nesta modalidade.\nDeseja realizar um depósito agora?")) {
+                window.location.href = "pagamento.html";
+            }
+        }
+
+        function filtrar(categoria) {
+            const cards = document.querySelectorAll('.card-jogo');
+            const btns = document.querySelectorAll('.btn-cat');
+
+            btns.forEach(b => b.classList.remove('ativo'));
+            event.target.classList.add('ativo');
+
+            cards.forEach(card => {
+                if (categoria === 'todos' || card.getAttribute('data-categoria') === categoria) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function obterValorAposta() {
+            const valInput = parseFloat(document.getElementById('val_aposta').value);
+            if (isNaN(valInput) || valInput <= 0) {
+                return 1;
+            }
+            return valInput;
+        }
+
+        function atualizarTextoBotao() {
+            const valAposta = obterValorAposta();
+            const btnAcao = document.getElementById('btn_acao_jogo');
+
+            if (tipoJogoAtual === 'tiger') {
+                btnAcao.textContent = `🎰 GIRAR (R$ ${valAposta})`;
+            } else if (tipoJogoAtual === 'aviator' && !rodandoAviator) {
+                btnAcao.textContent = `🚀 DECOLAR (R$ ${valAposta})`;
+            } else if (tipoJogoAtual === 'roleta') {
+                btnAcao.textContent = `🎲 RODAR ROLETA (R$ ${valAposta})`;
+            }
+        }
+
+        function abrirModalDemo(tipoJogo) {
+            tipoJogoAtual = tipoJogo;
+            const modal = document.getElementById('modal_demo');
+            const titulo = document.getElementById('modal_titulo');
+            const tela = document.getElementById('tela_jogo');
+            const btnAcao = document.getElementById('btn_acao_jogo');
+
+            modal.classList.add('ativo');
+
+            if (tipoJogo === 'tiger') {
+                titulo.innerHTML = '🐯 Fortune Tiger <span>MODO DEMO</span>';
+                tela.innerHTML = `
+                    <div class="slots-grid">
+                        <div class="reel" id="r1">🐯</div>
+                        <div class="reel" id="r2">🍊</div>
+                        <div class="reel" id="r3">💎</div>
+                    </div>
+                    <p id="msg_resultado" style="margin-top:20px; color:#00ff00; font-weight:bold; min-height:20px;"></p>
+                `;
+                btnAcao.onclick = girarSlots;
+            } else if (tipoJogo === 'aviator') {
+                titulo.innerHTML = '🚀 Aviator Crash <span>MODO DEMO</span>';
+                tela.innerHTML = `
+                    <div style="text-align:center;">
+                        <h1 id="mult_aviator" style="font-size: 55px; color:#00ff00;">1.00x</h1>
+                        <p id="status_aviator" style="color:#aaa;">Clique em DECOLAR para iniciar!</p>
+                    </div>
+                `;
+                btnAcao.onclick = iniciarAviator;
+            } else if (tipoJogo === 'roleta') {
+                titulo.innerHTML = '🎲 Roleta VIP <span>MODO DEMO</span>';
+                tela.innerHTML = `
+                    <div style="text-align:center;">
+                        <div class="roleta-box" id="num_roleta">❓</div>
+                        <p id="msg_roleta" style="color:#aaa; margin-top:10px;">Aposte no Vermelho ou Preto!</p>
+                    </div>
+                `;
+                btnAcao.onclick = rodarRoleta;
+            }
+
+            atualizarTextoBotao();
+        }
+
+        function fecharModalDemo() {
+            document.getElementById('modal_demo').classList.remove('ativo');
+            saldoDemo = 1000;
+            atualizarSaldo();
+            rodandoAviator = false;
+        }
+
+        function girarSlots() {
+            const valAposta = obterValorAposta();
+
+            if (saldoDemo < valAposta) { alert('Saldo Demo insuficiente!'); return; }
+            saldoDemo -= valAposta;
+            atualizarSaldo();
+
+            const simbolos = ['🐯', '🍊', '💎', '🧧', '💰'];
+            const r1 = document.getElementById('r1');
+            const r2 = document.getElementById('r2');
+            const r3 = document.getElementById('r3');
+            const msg = document.getElementById('msg_resultado');
+
+            msg.textContent = "Girando...";
+
+            let tempo = 0;
+            const intervalo = setInterval(() => {
+                r1.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
+                r2.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
+                r3.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
+                tempo += 100;
+
+                if (tempo >= 1200) {
+                    clearInterval(intervalo);
+                    if (r1.textContent === r2.textContent && r2.textContent === r3.textContent) {
+                        const premio = valAposta * 10;
+                        saldoDemo += premio;
+                        atualizarSaldo();
+                        msg.textContent = `🎉 SUPER WIN! Você ganhou R$ ${premio.toFixed(2)}!`;
+                    } else if (r1.textContent === r2.textContent || r2.textContent === r3.textContent) {
+                        const premio = valAposta * 2.5;
+                        saldoDemo += premio;
+                        atualizarSaldo();
+                        msg.textContent = `✨ GANHOU! Combinação dupla: R$ ${premio.toFixed(2)}!`;
+                    } else {
+                        msg.textContent = "❌ Tente novamente!";
+                    }
+                }
+            }, 100);
+        }
+
+        function iniciarAviator() {
+            if (rodandoAviator) return;
+            const valAposta = obterValorAposta();
+
+            if (saldoDemo < valAposta) { alert('Saldo Demo insuficiente!'); return; }
+            
+            saldoDemo -= valAposta;
+            atualizarSaldo();
+            rodandoAviator = true;
+
+            const multElem = document.getElementById('mult_aviator');
+            const statusElem = document.getElementById('status_aviator');
+            const btnAcao = document.getElementById('btn_acao_jogo');
+
+            let mult = 1.00;
+            const crashPonto = (Math.random() * 4 + 1.1).toFixed(2);
+            
+            statusElem.textContent = "✈️ Avião voando...";
+            btnAcao.textContent = "💰 RETIRAR GANHO";
+
+            const timer = setInterval(() => {
+                mult += 0.05;
+                multElem.textContent = mult.toFixed(2) + 'x';
+
+                if (mult >= crashPonto) {
+                    clearInterval(timer);
+                    multElem.style.color = '#ff3333';
+                    statusElem.textContent = `💥 CRASH! O avião voou para longe em ${crashPonto}x!`;
+                    rodandoAviator = false;
+                    atualizarTextoBotao();
+                    btnAcao.onclick = iniciarAviator;
+                }
+            }, 100);
+
+            btnAcao.onclick = () => {
+                if (rodandoAviator) {
+                    clearInterval(timer);
+                    const ganho = Math.round(valAposta * mult);
+                    saldoDemo += ganho;
+                    atualizarSaldo();
+                    multElem.style.color = '#00ff00';
+                    statusElem.textContent = `✅ VOCÊ RETIROU! Ganho de R$ ${ganho.toFixed(2)}!`;
+                    rodandoAviator = false;
+                    atualizarTextoBotao();
+                    btnAcao.onclick = iniciarAviator;
+                }
+            };
+        }
+
+        function rodarRoleta() {
+            const valAposta = obterValorAposta();
+
+            if (saldoDemo < valAposta) { alert('Saldo Demo insuficiente!'); return; }
+            saldoDemo -= valAposta;
+            atualizarSaldo();
+
+            const numElem = document.getElementById('num_roleta');
+            const msgElem = document.getElementById('msg_roleta');
+            
+            msgElem.textContent = "Girando a roleta...";
+            let giros = 0;
+
+            const timer = setInterval(() => {
+                numElem.textContent = Math.floor(Math.random() * 37);
+                giros++;
+
+                if (giros > 15) {
+                    clearInterval(timer);
+                    const finalNum = Math.floor(Math.random() * 37);
+                    numElem.textContent = finalNum;
+                    
+                    if (finalNum % 2 === 0 && finalNum !== 0) {
+                        const ganho = valAposta * 2;
+                        saldoDemo += ganho;
+                        atualizarSaldo();
+                        msgElem.textContent = `🔴 Número ${finalNum} (PAR) - Ganhou R$ ${ganho.toFixed(2)}!`;
+                    } else {
+                        msgElem.textContent = `⚫ Número ${finalNum} (ÍMPAR) - Tente na próxima!`;
+                    }
+                }
+            }, 80);
+        }
+
+        function atualizarSaldo() {
+            document.getElementById('saldo_demo_val').textContent = `R$ ${saldoDemo.toFixed(2).replace('.', ',')}`;
+        }
+    </script>
+</body>
+</html>

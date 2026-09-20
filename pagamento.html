@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarcisio BET - Pagamento</title>
+    
+    <!-- ÍCONE DA ABA DO NAVEGADOR -->
+    <link rel="icon" type="image/png" href="navegador.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* RESET E COR DO FUNDO */
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 15px 0;
+        }
+
+        /* Centraliza a logo no topo */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+
+        .logo-container img {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Centraliza a navegação */
+        .menu-navegacao {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+
+        .btn-inicio {
+            color: #ffffff !important;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: 0.2s;
+            font-size: 16px;
+        }
+
+        .btn-inicio:hover {
+            color: #00ff00 !important;
+            background-color: #111111 !important;
+        }
+
+        /* CAIXA DE PAGAMENTO */
+        .caixa-pagamento {
+            background-color: #0a0a0a;
+            border: 1px solid #00ff00;
+            border-radius: 12px;
+            padding: 30px 20px;
+            max-width: 520px;
+            width: 92%;
+            margin: 25px auto;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.15);
+        }
+
+        .caixa-pagamento h1 {
+            margin-top: 0;
+            color: #00ff00 !important;
+            text-transform: uppercase;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .subtitulo-secao {
+            font-size: 14px;
+            color: #aaaaaa;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 15px 0 10px 0;
+            text-align: left;
+        }
+
+        /* SELEÇÃO DE VALOR DO DEPÓSITO */
+        .grid-valores {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn-valor {
+            background-color: #121212;
+            border: 1px solid #333333;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-valor:hover, .btn-valor.ativo {
+            border-color: #00ff00;
+            background-color: #003300;
+            color: #00ff00;
+        }
+
+        .campo-customizado {
+            display: flex;
+            align-items: center;
+            background-color: #121212;
+            border: 1px solid #333333;
+            border-radius: 6px;
+            padding: 0 12px;
+            margin-bottom: 20px;
+        }
+
+        .simbolo-moeda {
+            color: #00ff00;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .campo-customizado input {
+            border: none;
+            background: transparent;
+            padding: 12px 0;
+            color: #ffffff;
+            width: 100%;
+            outline: none;
+            font-size: 15px;
+        }
+
+        /* ABAS DE MÉTODOS DE PAGAMENTO */
+        .metodos-pagamento {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .aba-metodo {
+            flex: 1;
+            padding: 12px;
+            background-color: #121212;
+            border: 1px solid #333333;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .aba-metodo.ativo {
+            border-color: #00ff00;
+            background-color: #00ff00;
+            color: #000000;
+        }
+
+        /* CONTEÚDO DOS MÉTODOS */
+        .conteudo-metodo {
+            display: none;
+        }
+
+        .conteudo-metodo.ativo {
+            display: block;
+        }
+
+        /* ESTILOS ESPECÍFICOS PIX */
+        .qr-code-img {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #ffffff;
+            margin: 10px 0;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .codigo-pix-container {
+            background-color: #121212;
+            border: 1px dashed #00ff00;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 15px 0;
+        }
+
+        .codigo-pix {
+            color: #00ff00;
+            word-break: break-all;
+            font-size: 12px;
+            font-family: monospace;
+            margin: 0;
+            user-select: all;
+        }
+
+        /* ESTILOS ESPECÍFICOS CARTÃO */
+        .form-cartao {
+            text-align: left;
+        }
+
+        .label-campo {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #cccccc;
+        }
+
+        .input-cartao {
+            width: 100%;
+            padding: 12px;
+            background-color: #121212;
+            border: 1px solid #333333;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 14px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+
+        .input-cartao:focus {
+            border-color: #00ff00;
+        }
+
+        .grid-duplo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        /* BOTÕES DE AÇÃO */
+        .btn-acao {
+            width: 100%;
+            background-color: #00ff00 !important;
+            color: #000000 !important;
+            border: none !important;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-acao:hover {
+            background-color: #00cc00 !important;
+            box-shadow: 0 0 12px rgba(0, 255, 0, 0.4);
+        }
+
+        .btn-copiar {
+            width: 100%;
+            background-color: transparent !important;
+            color: #00ff00 !important;
+            border: 1px solid #00ff00 !important;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            margin-bottom: 10px;
+        }
+
+        .btn-copiar:hover {
+            background-color: #00ff00 !important;
+            color: #000000 !important;
+        }
+
+        .btn-voltar {
+            display: inline-block;
+            width: 100%;
+            background-color: transparent;
+            color: #aaaaaa;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+
+        .btn-voltar:hover {
+            color: #ffffff;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #222222;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 400px) {
+            .grid-valores {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABEÇALHO ATUALIZADO PARA USUÁRIO LOGADO -->
+    <header>
+        <div class="logo-container">
+            <a href="pag principal.html"><img src="logo da bet.png" alt="Logo Tarcisio BET"></a>
+        </div>
+        
+        <nav class="menu-navegacao">
+            <a class="btn-inicio" href="pag principal.html">Página Principal</a>
+            <a class="btn-inicio" href="dashboard.html">Jogos</a>
+            <a class="btn-inicio" href="suporte.html">Suporte</a>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="caixa-pagamento">
+            <h1>Área de Depósito</h1>
+
+            <!-- SELEÇÃO DE VALOR -->
+            <div class="subtitulo-secao">1. Selecione o Valor</div>
+            <div class="grid-valores">
+                <button type="button" class="btn-valor" onclick="selecionarValor(20, this)">R$ 20</button>
+                <button type="button" class="btn-valor ativo" onclick="selecionarValor(50, this)">R$ 50</button>
+                <button type="button" class="btn-valor" onclick="selecionarValor(100, this)">R$ 100</button>
+            </div>
+
+            <div class="campo-customizado">
+                <span class="simbolo-moeda">R$</span>
+                <input type="number" id="valor_deposito" value="50" min="5" placeholder="Outro valor (Mínimo R$ 5)">
+            </div>
+
+            <!-- SELEÇÃO DE MÉTODO -->
+            <div class="subtitulo-secao">2. Escolha o Método</div>
+            <div class="metodos-pagamento">
+                <button type="button" class="aba-metodo ativo" onclick="mudarMetodo('pix', this)">PIX</button>
+                <button type="button" class="aba-metodo" onclick="mudarMetodo('cartao', this)">Cartão de Crédito</button>
+            </div>
+
+            <hr>
+
+            <!-- ABA PIX -->
+            <div id="metodo-pix" class="conteudo-metodo ativo">
+                <p style="color: #aaaaaa; font-size: 14px; margin-top: 0;">Escaneie o QR Code com o aplicativo do seu banco:</p>
+                
+                <img class="qr-code-img" src="so o qr code.png" alt="QR Code PIX Tarcisio BET">
+                
+                <div class="codigo-pix-container">
+                    <p class="codigo-pix" id="pixCode">00020126360014br.gov.bcb.pix0114+55859967971125204000053039865802BR5924LIMATARCISIO2022082614136009SaoPaulo610901227-20062240520daqr118686558319724163045683</p>
+                </div>
+
+                <button class="btn-copiar" id="btnCopiar" onclick="copiarPix()">Copiar Código PIX</button>
+                <button class="btn-acao" onclick="confirmarPagamento()">Já realizei o pagamento</button>
+            </div>
+
+            <!-- ABA CARTÃO DE CRÉDITO -->
+            <div id="metodo-cartao" class="conteudo-metodo">
+                <form class="form-cartao" onsubmit="event.preventDefault(); confirmarPagamento();">
+                    <label class="label-campo">Número do Cartão:</label>
+                    <input type="text" class="input-cartao" placeholder="0000 0000 0000 0000" maxlength="19" required>
+
+                    <label class="label-campo">Nome impresso no cartão:</label>
+                    <input type="text" class="input-cartao" placeholder="NOME COMO NO CARTÃO" required>
+
+                    <div class="grid-duplo">
+                        <div>
+                            <label class="label-campo">Validade:</label>
+                            <input type="text" class="input-cartao" placeholder="MM/AA" maxlength="5" required>
+                        </div>
+                        <div>
+                            <label class="label-campo">CVV:</label>
+                            <input type="text" class="input-cartao" placeholder="123" maxlength="4" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-acao">Pagar com Cartão</button>
+                </form>
+            </div>
+
+            <a href="dashboard.html" class="btn-voltar">Voltar para a Dashboard</a>
+        </div>
+    </main>
+
+    <script>
+        function selecionarValor(valor, elemento) {
+            document.getElementById('valor_deposito').value = valor;
+            const botoes = document.querySelectorAll('.btn-valor');
+            botoes.forEach(btn => btn.classList.remove('ativo'));
+            elemento.classList.add('ativo');
+        }
+
+        document.getElementById('valor_deposito').addEventListener('input', () => {
+            const botoes = document.querySelectorAll('.btn-valor');
+            botoes.forEach(btn => btn.classList.remove('ativo'));
+        });
+
+        function mudarMetodo(metodo, elemento) {
+            const abas = document.querySelectorAll('.aba-metodo');
+            const conteudos = document.querySelectorAll('.conteudo-metodo');
+
+            abas.forEach(aba => aba.classList.remove('ativo'));
+            conteudos.forEach(c => c.classList.remove('ativo'));
+
+            elemento.classList.add('ativo');
+            document.getElementById('metodo-' + metodo).classList.add('ativo');
+        }
+
+        function copiarPix() {
+            const textoPix = document.getElementById("pixCode").innerText;
+            navigator.clipboard.writeText(textoPix).then(() => {
+                const btn = document.getElementById("btnCopiar");
+                btn.innerText = "✓ Código Copiado!";
+                btn.style.backgroundColor = "#00ff00";
+                btn.style.color = "#000000";
+
+                setTimeout(() => {
+                    btn.innerText = "Copiar Código PIX";
+                    btn.style.backgroundColor = "transparent";
+                    btn.style.color = "#00ff00";
+                }, 3000);
+            });
+        }
+
+        function confirmarPagamento() {
+            const valor = document.getElementById('valor_deposito').value;
+            if (valor < 5) {
+                alert("O valor mínimo para depósito é R$ 5,00");
+                return;
+            }
+            alert(`Processando depósito no valor de R$ ${valor}... Redirecionando para a Dashboard!`);
+            window.location.href = "dashboard.html";
+        }
+    </script>
+
+</body>
+</html>
