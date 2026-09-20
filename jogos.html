@@ -112,6 +112,7 @@
             margin-bottom: 25px;
             overflow-x: auto;
             padding-bottom: 5px;
+            -webkit-overflow-scrolling: touch;
         }
 
         .btn-cat {
@@ -375,7 +376,6 @@
             font-size: 16px;
         }
 
-        /* PAINEL DE VALOR DA APOSTA */
         .aposta-input-box {
             display: flex;
             align-items: center;
@@ -420,7 +420,6 @@
             transform: scale(1.03);
         }
 
-        /* ESTILOS DE JOGOS */
         .slots-grid {
             display: flex;
             gap: 15px;
@@ -476,10 +475,10 @@
 
         <!-- FILTROS DE JOGO -->
         <div class="categorias-bar">
-            <button class="btn-cat ativo" onclick="filtrar('todos')">🔥 Todos os Jogos</button>
-            <button class="btn-cat" onclick="filtrar('slots')">🎰 Slots / Fortune</button>
-            <button class="btn-cat" onclick="filtrar('crash')">🚀 Crash Games</button>
-            <button class="btn-cat" onclick="filtrar('cassino')">🎲 Cassino ao Vivo</button>
+            <button class="btn-cat ativo" onclick="filtrar('todos', event)">🔥 Todos os Jogos</button>
+            <button class="btn-cat" onclick="filtrar('slots', event)">🎰 Slots / Fortune</button>
+            <button class="btn-cat" onclick="filtrar('crash', event)">🚀 Crash Games</button>
+            <button class="btn-cat" onclick="filtrar('cassino', event)">🎲 Cassino ao Vivo</button>
         </div>
 
         <!-- GRID DE JOGOS -->
@@ -591,12 +590,14 @@
             }
         }
 
-        function filtrar(categoria) {
+        function filtrar(categoria, evt) {
             const cards = document.querySelectorAll('.card-jogo');
             const btns = document.querySelectorAll('.btn-cat');
 
             btns.forEach(b => b.classList.remove('ativo'));
-            event.target.classList.add('ativo');
+            if (evt && evt.target) {
+                evt.target.classList.add('ativo');
+            }
 
             cards.forEach(card => {
                 if (categoria === 'todos' || card.getAttribute('data-categoria') === categoria) {
@@ -733,6 +734,7 @@
             const statusElem = document.getElementById('status_aviator');
             const btnAcao = document.getElementById('btn_acao_jogo');
 
+            multElem.style.color = '#00ff00';
             let mult = 1.00;
             const crashPonto = (Math.random() * 4 + 1.1).toFixed(2);
             
