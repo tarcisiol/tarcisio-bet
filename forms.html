@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarcisio BET - Cadastro</title>
     
-    <!-- ÍCONE DA ABA DO NAVEGADOR -->
+    <!-- ÍCONE DA ABA DO NAVAGADOR -->
     <link rel="icon" type="image/png" href="navegador.png">
     
     <link rel="stylesheet" href="style.css">
@@ -21,6 +21,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 15px 0;
+            overflow-x: hidden;
         }
 
         /* Centraliza a logo no topo */
@@ -30,10 +31,13 @@
             padding: 0 10px;
         }
 
+        /* AJUSTE FINO DA LOGO NO CABEÇALHO */
         .logo-container img {
-            max-width: 220px;
-            width: 100%;
+            width: 140px;
             height: auto;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
         }
 
         /* Centraliza a navegação logo abaixo da logo */
@@ -99,7 +103,7 @@
             border: 1px solid #333333 !important;
             border-radius: 6px;
             color: #ffffff !important;
-            font-size: 15px;
+            font-size: 16px; /* Evita zoom automático em iOS */
             margin-bottom: 15px;
             outline: none;
             transition: border-color 0.2s;
@@ -123,9 +127,10 @@
 
         .container-termos input[type="checkbox"] {
             accent-color: #00ff00;
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .container-termos a {
@@ -179,6 +184,7 @@
         @media (max-width: 400px) {
             .caixa-cadastro {
                 padding: 20px 12px;
+                width: 95%;
             }
 
             .btn-inicio {
@@ -196,7 +202,9 @@
 
     <header>
         <div class="logo-container">
-            <a href="index.html"><img src="logo da bet.png" alt="Logo Tarcisio BET"></a>
+            <a href="index.html">
+                <img src="logo da bet.png" alt="Logo Tarcisio BET" fetchpriority="high">
+            </a>
         </div>
         
         <nav class="menu-navegacao">
@@ -210,7 +218,7 @@
         <div class="caixa-cadastro">
             <h1>Criar Nova Conta</h1>
             
-            <form id="form_cadastro" action="dashboard.html" method="GET">
+            <form id="form_cadastro" action="dashboard.html" method="POST">
 
                 <label class="label-campo" for="campo_nome">Nome:</label>
                 <input id="campo_nome" name="nome" type="text" placeholder="Digite seu nome" required>
@@ -235,11 +243,10 @@
                 <input id="campo_confirmar_senha" name="confirmar_senha" type="password" placeholder="Confirme sua senha" required>
                 <div id="erro_senha" class="mensagem-erro">🚫 As senhas não coincidem.</div>
 
-                <!-- BLOCO CORRIGIDO COM APENAS UMA CAIXINHA -->
                 <div class="container-termos">
                     <input type="checkbox" id="termos" name="termos" required>
                     <label for="termos">
-                        Li e aceito os <a href="termos e condições.html" style="color: #00ff00; text-decoration: underline;" target="_blank">Termos e Condições</a>
+                        Li e aceito os <a href="termos e condições.html" target="_blank">Termos e Condições</a>
                     </label>
                 </div>
 
@@ -306,7 +313,7 @@
                 formValido = false;
             }
 
-            // 2. Validação de Idade (Maior de 18)
+            // 2. Validação de Idade (Maior de 18) e Data Real
             const dataTexto = campoData.value;
             const partes = dataTexto.split('/');
 
@@ -316,8 +323,21 @@
                 const ano = parseInt(partes[2], 10);
 
                 const dataNascimento = new Date(ano, mes, dia);
-                const hoje = new Date();
+                
+                if (
+                    dataNascimento.getFullYear() !== ano ||
+                    dataNascimento.getMonth() !== mes ||
+                    dataNascimento.getDate() !== dia
+                ) {
+                    e.preventDefault();
+                    erroIdade.textContent = '🚫 Por favor, digite uma data válida.';
+                    erroIdade.style.display = 'block';
+                    campoData.style.borderColor = '#ff3333';
+                    if (formValido) campoData.focus();
+                    return;
+                }
 
+                const hoje = new Date();
                 let idade = hoje.getFullYear() - dataNascimento.getFullYear();
                 const m = hoje.getMonth() - dataNascimento.getMonth();
 
@@ -327,6 +347,7 @@
 
                 if (isNaN(idade) || idade < 18) {
                     e.preventDefault();
+                    erroIdade.textContent = '🚫 Você precisa ter 18 anos ou mais para se cadastrar.';
                     erroIdade.style.display = 'block';
                     campoData.style.borderColor = '#ff3333';
                     if (formValido) campoData.focus();

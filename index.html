@@ -7,17 +7,104 @@
     
     <link rel="icon" type="image/png" href="navegador.png">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* RESET E CORREÇÕES GLOBAIS DE RESPONSIVIDADE */
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* AJUSTE FINO PARA O TAMANHO DA LOGO NO CABEÇALHO */
+        .logo-container img {
+            width: 150px;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* BARRA DE AVISO SUPERIOR RESPONSIVA */
+        .aviso-topo {
+            background: rgba(0, 255, 0, 0.1);
+            border-bottom: 1px solid var(--primary);
+            text-align: center;
+            padding: 10px 15px;
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+
+        /* CONTAINER PRINCIPAL */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* SEÇÃO DE ESTATÍSTICAS / GRID */
+        .grid-estatisticas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .card-estatistica {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 18px;
+            border-radius: 10px;
+        }
+
+        /* FAQ RESPONSIVO */
+        .secao-faq {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* MEDIA QUERIES PARA DISPOSITIVOS MÓVEIS PEQUENOS */
+        @media (max-width: 480px) {
+            .aviso-topo {
+                font-size: 11px;
+                padding: 8px 10px;
+            }
+
+            .grid-estatisticas {
+                grid-template-columns: 1fr; /* Um card por linha em telas muito pequenas */
+            }
+
+            .secao-faq {
+                padding: 15px;
+            }
+            
+            header {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <div style="background: rgba(0, 255, 0, 0.1); border-bottom: 1px solid var(--primary); text-align: center; padding: 10px; font-size: 13px; color: var(--primary); font-weight: bold; letter-spacing: 0.5px;">
+    <div class="aviso-topo">
         ⚡ CADASTRE-SE HOJE E GANHE 100% DE BÔNUS NO PRIMEIRO DEPÓSITO VIA PIX!
     </div>
 
     <header>
         <div class="logo-container">
             <a href="index.html">
-                <img src="logo da bet.png" alt="Logo Tarcisio BET">
+                <img src="logo da bet.png" alt="Logo Tarcisio BET" fetchpriority="high">
             </a>
         </div>
         
@@ -39,20 +126,20 @@
             </a>
         </section>
 
-        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 30px 0; text-align: center;">
-            <div style="background: var(--card-bg); border: 1px solid var(--border); padding: 18px; border-radius: 10px;">
+        <section class="grid-estatisticas">
+            <div class="card-estatistica">
                 <h3 style="color: var(--primary); font-size: 22px; margin-bottom: 5px;">-</h3>
                 <p style="color: var(--text-muted); font-size: 12px; margin: 0;">Apostadores Ativos</p>
             </div>
-            <div style="background: var(--card-bg); border: 1px solid var(--border); padding: 18px; border-radius: 10px;">
+            <div class="card-estatistica">
                 <h3 style="color: var(--primary); font-size: 22px; margin-bottom: 5px;">R$x</h3>
                 <p style="color: var(--text-muted); font-size: 12px; margin: 0;">Pagos via PIX</p>
             </div>
-            <div style="background: var(--card-bg); border: 1px solid var(--border); padding: 18px; border-radius: 10px;">
+            <div class="card-estatistica">
                 <h3 style="color: var(--primary); font-size: 22px; margin-bottom: 5px;">&lt; 1 Minuto</h3>
                 <p style="color: var(--text-muted); font-size: 12px; margin: 0;">Tempo Médio de Saque</p>
             </div>
-            <div style="background: var(--card-bg); border: 1px solid var(--border); padding: 18px; border-radius: 10px;">
+            <div class="card-estatistica">
                 <h3 style="color: var(--primary); font-size: 22px; margin-bottom: 5px;">99.8%</h3>
                 <p style="color: var(--text-muted); font-size: 12px; margin: 0;">Taxa de Aprovação</p>
             </div>
@@ -112,17 +199,17 @@
 
         <div class="titulo-secao">PERGUNTAS FREQUENTES</div>
 
-        <section style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 30px;">
+        <section class="secao-faq">
             <div style="margin-bottom: 15px;">
                 <h4 style="color: var(--primary); font-size: 15px; margin-bottom: 5px;">Qual o valor mínimo de depósito?</h4>
                 <p style="color: var(--text-muted); font-size: 13px;">O valor mínimo para começar a apostar na Tarcisio BET é de apenas R$ 1,00 via PIX.</p>
             </div>
-            <hr style="margin: 12px 0;">
+            <hr style="margin: 12px 0; border: 0; border-top: 1px solid var(--border);">
             <div style="margin-bottom: 15px;">
                 <h4 style="color: var(--primary); font-size: 15px; margin-bottom: 5px;">Como funciona o bônus de boas-vindas?</h4>
                 <p style="color: var(--text-muted); font-size: 13px;">Ao realizar o seu primeiro depósito, seu saldo é duplicado automaticamente para você apostar mais.</p>
             </div>
-            <hr style="margin: 12px 0;">
+            <hr style="margin: 12px 0; border: 0; border-top: 1px solid var(--border);">
             <div>
                 <h4 style="color: var(--primary); font-size: 15px; margin-bottom: 5px;">Em quanto tempo o saque cai na conta?</h4>
                 <p style="color: var(--text-muted); font-size: 13px;">Os saques são processados instantaneamente por meio do sistema automático PIX.</p>

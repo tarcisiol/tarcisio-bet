@@ -7,6 +7,202 @@
     
     <link rel="icon" type="image/png" href="navegador.png">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 10px 0;
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .logo-container img {
+            max-width: 180px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .menu-navegacao {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+
+        .btn-inicio {
+            color: #ffffff !important;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: 0.2s;
+            font-size: 15px;
+        }
+
+        .btn-inicio:hover {
+            color: #00ff00 !important;
+            background-color: #111111 !important;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #222222 !important;
+            margin: 10px 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .card-termos {
+            background-color: var(--card-bg, #0a0a0a);
+            border: 1px solid var(--border, #222222);
+            border-radius: 12px;
+            padding: 35px 25px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-termos h1 {
+            color: var(--primary, #00ff00);
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-atualizacao {
+            color: var(--text-muted, #888888);
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        /* SUMÁRIO / ÍNDICE RÁPIDO */
+        .sumario-box {
+            background-color: #111111;
+            border-left: 4px solid var(--primary, #00ff00);
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 30px;
+        }
+
+        .sumario-box p {
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .sumario-box ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 6px;
+        }
+
+        .sumario-box li a {
+            color: #aaaaaa;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .sumario-box li a:hover {
+            color: var(--primary, #00ff00);
+            text-decoration: underline;
+        }
+
+        /* CONTEÚDO DOS TERMOS */
+        .conteudo-termos {
+            line-height: 1.7;
+            color: #dddddd;
+            font-size: 14px;
+        }
+
+        .conteudo-termos h3 {
+            color: var(--primary, #00ff00);
+            margin-top: 30px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 5px;
+        }
+
+        .conteudo-termos p {
+            margin-bottom: 15px;
+            color: #cccccc;
+        }
+
+        .btn-voltar-container {
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        .btn-voltar-inicio {
+            display: inline-block;
+            background-color: var(--primary, #00ff00);
+            color: #000000;
+            text-decoration: none;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .btn-voltar-inicio:hover {
+            background-color: #00cc00;
+            box-shadow: 0 0 12px rgba(0, 255, 0, 0.3);
+        }
+
+        /* RODAPÉ */
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            color: var(--text-muted, #888888);
+            font-size: 13px;
+        }
+
+        .pix-badge-footer {
+            margin-bottom: 10px;
+        }
+
+        .pix-badge-footer span {
+            border: 1px solid var(--primary, #00ff00);
+            color: var(--primary, #00ff00);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+    </style>
 </head>
 <body>
 
@@ -27,35 +223,49 @@
     <hr>
 
     <main class="container">
-        <section style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin: 30px 0;">
-            <h1 style="color: var(--primary); text-align: center; margin-bottom: 20px; font-size: 24px;">TERMOS E CONDIÇÕES DE USO</h1>
-            <p style="color: var(--text-muted); font-size: 13px; text-align: center; margin-bottom: 30px;">Última atualização: Março de 2026</p>
+        <section class="card-termos">
+            <h1>Termos e Condições de Uso</h1>
+            <p class="data-atualizacao">Última atualização: Março de 2026</p>
 
-            <div style="line-height: 1.6; color: #ddd; font-size: 14px;">
-                <h3 style="color: var(--primary); margin-top: 20px;">1. ACEITAÇÃO DOS TERMOS</h3>
-                <p>Ao criar uma conta ou utilizar qualquer serviço da <strong>Tarcisio BET</strong>, você concorda expressamente em cumprir todos os termos, condições e regulamentos descritos neste documento.</p>
-
-                <h3 style="color: var(--primary); margin-top: 20px;">2. ELEGIBILIDADE E MAIORIDADE LEGAL</h3>
-                <p>O uso de nossa plataforma é estritamente proibido para menores de 18 (dezoito) anos. Ao se cadastrar, você declara e garante que possui capacidade legal plena e idade mínima exigida por lei.</p>
-
-                <h3 style="color: var(--primary); margin-top: 20px;">3. CADASTRO E SEGURANÇA DA CONTA</h3>
-                <p>Cada usuário tem direito a apenas uma conta ativa. Contas duplicadas ou vinculadas ao mesmo CPF/PIX poderão ser suspensas. O usuário é o único responsável por manter o sigilo de sua senha e dados de acesso.</p>
-
-                <h3 style="color: var(--primary); margin-top: 20px;">4. DEPÓSITOS E SAQUES (PIX)</h3>
-                <p>Todas as transações financeiras são efetuadas via sistema PIX. Os saques só serão liberados para contas bancárias vinculadas ao mesmo titular do CPF cadastrado na plataforma.</p>
-
-                <h3 style="color: var(--primary); margin-top: 20px;">5. MODO DEMONSTRATIVO</h3>
-                <p>O saldo fornecido no modo de teste/demonstração possui caráter estritamente educativo e fictício, não podendo ser convertido em dinheiro real nem transferido para saques.</p>
-
-                <h3 style="color: var(--primary); margin-top: 20px;">6. JOGO RESPONSÁVEL</h3>
-                <p>Apostar deve ser uma atividade de entretenimento. Recomendamos que você defina limites para seus depósitos e apostas. Se sentir necessidade, utilize a opção de autoexclusão através do nosso Suporte.</p>
-
-                <h3 style="color: var(--primary); margin-top: 20px;">7. ALTERAÇÕES NOS TERMOS</h3>
-                <p>A Tarcisio BET reserva-se o direito de alterar estes termos a qualquer momento. O uso contínuo da plataforma após as modificações constitui a aceitação dos novos termos.</p>
+            <!-- SUMÁRIO INTERATIVO -->
+            <div class="sumario-box">
+                <p>Navegação Rápida:</p>
+                <ul>
+                    <li><a href="#item1">1. Aceitação dos Termos</a></li>
+                    <li><a href="#item2">2. Elegibilidade e Maioridade</a></li>
+                    <li><a href="#item3">3. Cadastro e Segurança</a></li>
+                    <li><a href="#item4">4. Depósitos e Saques (PIX)</a></li>
+                    <li><a href="#item5">5. Modo Demonstrativo</a></li>
+                    <li><a href="#item6">6. Jogo Responsável</a></li>
+                    <li><a href="#item7">7. Alterações nos Termos</a></li>
+                </ul>
             </div>
 
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="index.html" class="btn-criar-conta-banner" style="display: inline-block; padding: 10px 20px; font-size: 14px;">VOLTAR PARA A PÁGINA INICIAL</a>
+            <div class="conteudo-termos">
+                <h3 id="item1">1. ACEITAÇÃO DOS TERMOS</h3>
+                <p>Ao criar uma conta, acessar ou utilizar qualquer serviço disponibilizado pela <strong>Tarcisio BET</strong>, você concorda expressamente em cumprir e se vincular a todos os termos, condições e regulamentos descritos neste documento, bem como à nossa Política de Privacidade.</p>
+
+                <h3 id="item2">2. ELEGIBILIDADE E MAIORIDADE LEGAL</h3>
+                <p>O uso de nossa plataforma e a realização de apostas são estritamente proibidos para menores de 18 (dezoito) anos. Ao se cadastrar, você declara e garante legalmente que possui capacidade civil plena e a idade mínima exigida pelas leis aplicáveis à sua jurisdição.</p>
+
+                <h3 id="item3">3. CADASTRO E SEGURANÇA DA CONTA</h3>
+                <p>Cada usuário tem direito a manter apenas uma única conta ativa. Contas duplicadas, múltiplas ou vinculadas ao mesmo CPF/PIX poderão ser suspensas ou encerradas sem aviso prévio. O usuário é o único e exclusivo responsável por manter o sigilo de sua senha, dados de acesso e por todas as atividades realizadas em sua conta.</p>
+
+                <h3 id="item4">4. DEPÓSITOS E SAQUES (PIX)</h3>
+                <p>Todas as transações financeiras de entrada e saída são efetuadas de forma automatizada via sistema PIX. Por motivos de segurança e conformidade contra fraudes, os saques serão liberados exclusivamente para contas bancárias e chaves PIX de titularidade idêntica ao CPF cadastrado na plataforma.</p>
+
+                <h3 id="item5">5. MODO DEMONSTRATIVO</h3>
+                <p>O saldo fornecido no modo de teste ou demonstração ("Modo Demo") possui caráter estritamente educativo, recreativo e fictício. Ele não possui valor monetário real, não podendo ser convertido em dinheiro físico nem transferido para saques.</p>
+
+                <h3 id="item6">6. JOGO RESPONSÁVEL</h3>
+                <p>Apostar na Tarcisio BET deve ser encarada primariamente como uma atividade de lazer e entretenimento. Recomendamos que você defina limites financeiros rigorosos para suas apostas. Caso sinta necessidade de pausa, disponibilizamos ferramentas de autoexclusão através de contato direto com o nosso Suporte.</p>
+
+                <h3 id="item7">7. ALTERAÇÕES NOS TERMOS</h3>
+                <p>A Tarcisio BET reserva-se o direito unilateral de atualizar, modificar ou alterar estes Termos e Condições a qualquer momento. O uso contínuo da plataforma após a publicação das alterações constitui a sua aceitação formal dos novos termos.</p>
+            </div>
+
+            <div class="btn-voltar-container">
+                <a href="index.html" class="btn-voltar-inicio">Voltar para a Página Inicial</a>
             </div>
         </section>
     </main>
@@ -63,11 +273,11 @@
     <hr>
 
     <footer>
-        <div style="margin-bottom: 15px;">
-            <span style="border: 1px solid var(--primary); color: var(--primary); padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-right: 8px;">PIX</span>
-            <span style="color: var(--text-muted); font-size: 12px;">Depósitos e Saques Imediatos</span>
+        <div class="pix-badge-footer">
+            <span>PIX</span>
+            <span style="color: var(--text-muted); border: none;">Depósitos e Saques Imediatos</span>
         </div>
-        <p>© Tarcisio BET. Aposte com responsabilidade. Proibido para menores de 18 anos.</p>
+        <p>© 2026 Tarcisio BET. Aposte com responsabilidade. Proibido para menores de 18 anos.</p>
     </footer>
 
 </body>
