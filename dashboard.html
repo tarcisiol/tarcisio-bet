@@ -13,6 +13,9 @@
         }
 
         html, body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            font-family: Arial, sans-serif;
             overflow-x: hidden;
             margin: 0;
             padding: 0;
@@ -27,7 +30,7 @@
             margin: 0 auto;
         }
 
-        /* ESTILOS EXCLUSIVOS DO PAINEL DO USUÁRIO (OTIMIZADOS E RESPONSIVOS) */
+        /* ESTILOS EXCLUSIVOS DO PAINEL DO USUÁRIO */
         .bar-usuario {
             background-color: #0a0a0a;
             border: 1px solid #00ff00;
@@ -41,7 +44,7 @@
             flex-wrap: wrap;
             gap: 15px;
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.15);
-            width: calc(100% - 30px); /* Garante margem lateral em mobile */
+            width: calc(100% - 30px);
         }
 
         .info-usuario {
@@ -103,7 +106,7 @@
             transform: scale(1.03);
         }
 
-        /* SEÇÃO DE JOGOS & DEMO (GRID RESPONSIVO OTIMIZADO) */
+        /* SEÇÃO DE JOGOS & DEMO */
         .jogos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -182,7 +185,7 @@
             width: 100%;
         }
 
-        /* TABELA DE JOGOS AO VIVO COM SUPORTE A ROLAGEM HORIZONTAL NO MOBILE */
+        /* TABELA DE JOGOS AO VIVO */
         .tabela-container {
             max-width: 1100px;
             margin: 20px auto;
@@ -236,6 +239,13 @@
             padding: 0 15px;
         }
 
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 13px;
+        }
+
         @media (max-width: 850px) {
             .bar-usuario {
                 flex-direction: column;
@@ -261,15 +271,15 @@
             </a>
         </div>
         
-        <nav class="menu-navegacao">
-            <a class="btn-inicio" href="dashboard.html">Painel</a>
-            <a class="btn-inicio" href="pagamento.html">Depositar</a>
-            <a class="btn-inicio" href="suporte.html">Suporte</a>
-            <a class="btn-inicio" href="index.html" style="color: #ff3333 !important;">Sair</a>
+        <nav class="menu-navegacao" style="display: flex; justify-content: center; gap: 15px; align-items: center; flex-wrap: wrap; padding: 10px;">
+            <a class="btn-inicio" href="dashboard.html" style="color: #ffffff; text-decoration: none; font-weight: bold; padding: 8px 16px;">Painel</a>
+            <a class="btn-inicio" href="pagamento.html" style="color: #ffffff; text-decoration: none; font-weight: bold; padding: 8px 16px;">Depositar</a>
+            <a class="btn-inicio" href="suporte.html" style="color: #ffffff; text-decoration: none; font-weight: bold; padding: 8px 16px;">Suporte</a>
+            <a class="btn-inicio" href="index.html" onclick="localStorage.clear()" style="color: #ff3333 !important; text-decoration: none; font-weight: bold; padding: 8px 16px;">Sair</a>
         </nav>
     </header>
 
-    <hr>
+    <hr style="border: 0; height: 1px; background: #222222; margin: 15px 0;">
 
     <main>
         <!-- BARRA DO USUÁRIO LOGADO -->
@@ -356,18 +366,24 @@
         </div>
     </main>
 
-    <hr>
+    <hr style="border: 0; height: 1px; background: #222222; margin: 15px 0;">
 
     <footer>
         <p>© Tarcisio BET. Aposte com responsabilidade. Proibido para menores de 18 anos.</p>
     </footer>
 
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const nome = params.get('nome');
-        if (nome) {
-            document.getElementById('nome_boas_vindas').textContent = `Bem-vindo(a), ${nome}! 👋`;
-        }
+        // Trava de segurança e exibição do nome via localStorage
+        window.addEventListener('DOMContentLoaded', () => {
+            const nomeSalvo = localStorage.getItem('usuarioLogadoNome');
+
+            if (nomeSalvo) {
+                document.getElementById('nome_boas_vindas').textContent = `Bem-vindo(a), ${nomeSalvo}! 👋`;
+            } else {
+                // Se o usuário tentar acessar a dashboard sem estar logado, expulsa para a index
+                window.location.href = "index.html";
+            }
+        });
 
         function alertaDeposito() {
             if (confirm("Você precisa de saldo para apostar valendo dinheiro real.\nDeseja ir para a página de depósito agora?")) {

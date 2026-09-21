@@ -8,6 +8,16 @@
     <link rel="icon" type="image/png" href="navegador.png">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* ESTILO PARA SELEÇÃO DE TEXTO EM VERDE NEON */
+        ::selection {
+            background-color: #00ff00;
+            color: #000000;
+        }
+        ::-moz-selection {
+            background-color: #00ff00;
+            color: #000000;
+        }
+
         /* RESET E CORREÇÕES GLOBAIS DE RESPONSIVIDADE */
         * {
             box-sizing: border-box;
@@ -19,13 +29,22 @@
             padding: 0;
         }
 
-        /* AJUSTE FINO PARA O TAMANHO DA LOGO NO CABEÇALHO */
+        /* AJUSTE FINO PARA A LOGO REDONDA NO PADRÃO DO SITE */
         .logo-container img {
-            width: 150px;
-            height: auto;
-            max-width: 100%;
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #00ff00;
             display: block;
             margin: 0 auto;
+            filter: drop-shadow(0 0 12px rgba(0, 255, 0, 0.4));
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 18px rgba(0, 255, 0, 0.7));
         }
 
         /* BARRA DE AVISO SUPERIOR RESPONSIVA */
@@ -82,7 +101,7 @@
             }
 
             .grid-estatisticas {
-                grid-template-columns: 1fr; /* Um card por linha em telas muito pequenas */
+                grid-template-columns: 1fr;
             }
 
             .secao-faq {
@@ -91,6 +110,11 @@
             
             header {
                 padding: 10px;
+            }
+
+            .logo-container img {
+                width: 110px;
+                height: 110px;
             }
         }
     </style>
@@ -103,7 +127,7 @@
 
     <header>
         <div class="logo-container">
-            <a href="index.html">
+            <a href="index.html" id="logoLink">
                 <img src="logo da bet.png" alt="Logo Tarcisio BET" fetchpriority="high">
             </a>
         </div>
@@ -227,5 +251,28 @@
         <p>© Tarcisio BET. Aposte com responsabilidade. Proibido para menores de 18 anos.</p>
     </footer>
 
+    <!-- SCRIPT DE VERIFICAÇÃO DE SESSÃO -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const usuarioLogado = localStorage.getItem('usuarioLogadoNome');
+            const menuNavegacao = document.querySelector('.menu-navegacao');
+
+            if (usuarioLogado && menuNavegacao) {
+                menuNavegacao.innerHTML = `
+                    <a class="btn-inicio" href="index.html">Início</a>
+                    <a class="btn-inicio" href="dashboard.html">Painel</a>
+                    <a class="btn-inicio" href="suporte.html">Suporte</a>
+                    <a class="btn-inicio" href="#" onclick="fazerLogout()" style="color: #ff4444 !important;">Sair (${usuarioLogado})</a>
+                `;
+            }
+        });
+
+        function fazerLogout() {
+            localStorage.removeItem('usuarioLogadoNome');
+            localStorage.removeItem('usuarioLogadoEmail');
+            alert("Você saiu da sua conta com sucesso!");
+            window.location.href = "index.html";
+        }
+    </script>
 </body>
 </html>

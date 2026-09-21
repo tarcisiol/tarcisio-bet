@@ -5,70 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarcisio BET - Jogos & Demos</title>
     
-    <!-- ÍCONE DA ABA DO NAVEGADOR -->
+    <!-- ÍCONE DA ABA DO NAVAGADOR -->
     <link rel="icon" type="image/png" href="navegador.png">
-    
-    <link rel="stylesheet" href="style.css">
+
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        /* Padroniza o tamanho de todos os emojis em formato de imagem do iPhone */
+        img.apple-emoji {
+            height: 1.1em;
+            width: 1.1em;
+            margin: 0 .1em;
+            vertical-align: -0.2em;
+            display: inline-block;
         }
 
         html, body {
-            background-color: #000000 !important;
+            background-color: #050505 !important;
             color: #ffffff !important;
-            font-family: Arial, sans-serif;
             padding-bottom: 40px;
             overflow-x: hidden;
         }
 
         .logo-container {
             text-align: center;
-            padding: 15px 10px 5px 10px;
+            padding: 20px 10px 10px 10px;
         }
 
         .logo-container img {
-            max-width: 180px;
+            max-width: 190px;
             width: 100%;
             height: auto;
             display: block;
             margin: 0 auto;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 0, 0.3));
         }
 
         .menu-navegacao {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             align-items: center;
             flex-wrap: wrap;
             padding: 10px;
         }
 
         .btn-inicio {
-            color: #ffffff !important;
+            color: #cccccc !important;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
             padding: 8px 16px;
-            border-radius: 5px;
-            transition: 0.2s;
+            border-radius: 6px;
+            transition: all 0.3s ease;
             font-size: 15px;
         }
 
         .btn-inicio:hover {
             color: #00ff00 !important;
-            background-color: #111111 !important;
+            background-color: rgba(0, 255, 0, 0.08) !important;
+            text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
         }
 
         hr {
             border: 0;
             height: 1px;
-            background: #222222 !important;
+            background: linear-gradient(90deg, transparent, #222222, transparent);
             margin: 15px 0;
         }
 
-        /* CONTAINER PRINCIPAL */
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -77,43 +86,52 @@
 
         /* BANNER DO MODO DEMO */
         .banner-demo {
-            background: linear-gradient(135deg, #052005 0%, #0a0a0a 100%);
-            border: 1px solid #00ff00;
-            border-radius: 12px;
-            padding: 20px;
+            background: linear-gradient(135deg, rgba(5, 32, 5, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
+            border: 1px solid rgba(0, 255, 0, 0.4);
+            border-radius: 14px;
+            padding: 22px;
             margin-bottom: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 255, 0, 0.1);
         }
 
         .banner-demo h2 {
             color: #00ff00;
-            font-size: 20px;
+            font-size: 19px;
             margin-bottom: 5px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
         }
 
         .banner-demo p {
-            color: #cccccc;
+            color: #b0b0b0;
             font-size: 14px;
         }
 
         .badge-demo {
-            background-color: #00ff00;
+            background: linear-gradient(135deg, #00ff00, #00aa00);
             color: #000000;
-            padding: 6px 14px;
-            font-weight: bold;
+            padding: 8px 16px;
+            font-weight: 800;
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
-            white-space: nowrap;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            animation: pulse-badge 2s infinite;
         }
 
-        /* FILTROS DE CATEGORIA */
+        @keyframes pulse-badge {
+            0% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 255, 0, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 0, 0.8); }
+            100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 255, 0, 0.4); }
+        }
+
+        /* FILTROS */
         .categorias-bar {
             display: flex;
             gap: 10px;
@@ -125,24 +143,25 @@
 
         .btn-cat {
             background-color: #121212;
-            border: 1px solid #333333;
-            color: #ffffff;
-            padding: 10px 18px;
+            border: 1px solid #2a2a2a;
+            color: #cccccc;
+            padding: 10px 20px;
             border-radius: 25px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 14px;
             white-space: nowrap;
-            transition: 0.2s;
+            transition: all 0.3s ease;
         }
 
         .btn-cat.ativo, .btn-cat:hover {
             border-color: #00ff00;
             color: #00ff00;
-            background-color: #002200;
+            background-color: rgba(0, 255, 0, 0.08);
+            box-shadow: 0 0 12px rgba(0, 255, 0, 0.2);
         }
 
-        /* GRID DE JOGOS */
+        /* GRID */
         .grid-jogos {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -150,23 +169,23 @@
         }
 
         .card-jogo {
-            background-color: #0a0a0a;
+            background-color: #0c0c0c;
             border: 1px solid #222222;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
-            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             flex-direction: column;
         }
 
         .card-jogo:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
             border-color: #00ff00;
-            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 255, 0, 0.25);
         }
 
         .capa-jogo {
-            height: 150px;
+            height: 160px;
             background-size: cover;
             background-position: center;
             position: relative;
@@ -179,37 +198,41 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             border: 1px solid #00ff00;
             color: #00ff00;
             font-size: 10px;
             font-weight: bold;
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 4px 10px;
+            border-radius: 6px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .icone-play {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(0, 255, 0, 0.85);
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #00ff00, #00aa00);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #000;
-            font-size: 20px;
+            font-size: 22px;
             opacity: 0;
-            transition: opacity 0.2s;
+            transform: scale(0.7);
+            transition: all 0.3s ease;
             cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
         }
 
         .card-jogo:hover .icone-play {
             opacity: 1;
+            transform: scale(1);
         }
 
         .info-jogo {
-            padding: 15px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -217,15 +240,16 @@
         }
 
         .info-jogo h3 {
-            font-size: 18px;
+            font-size: 17px;
             color: #ffffff;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .info-jogo p {
             font-size: 12px;
-            color: #aaaaaa;
-            margin-bottom: 15px;
+            color: #999999;
+            margin-bottom: 16px;
+            line-height: 1.4;
         }
 
         .botoes-card {
@@ -235,53 +259,62 @@
         }
 
         .btn-play-demo {
-            background-color: #1a1a1a;
+            background-color: #141414;
             color: #00ff00;
             border: 1px solid #00ff00;
             padding: 10px 5px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: bold;
             font-size: 12px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s;
             text-align: center;
         }
 
         .btn-play-demo:hover {
             background-color: #00ff00;
             color: #000000;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
         }
 
         .btn-play-real {
-            background-color: #00ff00;
+            background: linear-gradient(135deg, #00ff00, #00bb00);
             color: #000000;
             border: none;
             padding: 10px 5px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: bold;
             font-size: 12px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s;
             text-align: center;
         }
 
         .btn-play-real:hover {
-            background-color: #00cc00;
+            filter: brightness(1.15);
+            box-shadow: 0 0 12px rgba(0, 255, 0, 0.6);
         }
 
-        /* MODAL POPUP DO JOGO DEMO */
+        /* MODAL POPUP DO JOGO */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 9999;
             padding: 15px;
+            animation: fadeInModal 0.3s ease;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-overlay.ativo {
@@ -289,20 +322,26 @@
         }
 
         .modal-container {
-            background-color: #0d0d0d;
+            background-color: #0b0b0b;
             border: 2px solid #00ff00;
-            border-radius: 12px;
+            border-radius: 16px;
             width: 100%;
-            max-width: 650px;
+            max-width: 680px;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.35);
             display: flex;
             flex-direction: column;
+            animation: scaleModal 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes scaleModal {
+            from { transform: scale(0.85); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .modal-header {
-            background-color: #141414;
-            padding: 15px 20px;
+            background: linear-gradient(180deg, #161616 0%, #0e0e0e 100%);
+            padding: 15px 22px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -311,29 +350,31 @@
 
         .modal-header h3 {
             color: #00ff00;
-            font-size: 16px;
+            font-size: 17px;
             display: flex;
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
+            text-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
         }
 
         .modal-header h3 span {
             background: #00ff00;
             color: #000;
             font-size: 10px;
-            padding: 2px 6px;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-weight: bold;
+            font-weight: 800;
         }
 
         .btn-fechar {
             background: transparent;
             border: none;
-            color: #ffffff;
-            font-size: 26px;
+            color: #888;
+            font-size: 28px;
             cursor: pointer;
             line-height: 1;
+            transition: color 0.2s;
         }
 
         .btn-fechar:hover {
@@ -341,124 +382,202 @@
         }
 
         .modal-body {
-            padding: 20px;
+            padding: 22px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: #050505;
+            background: radial-gradient(circle at center, #111 0%, #030303 100%);
         }
 
+        /* PALCO DO JOGO */
         .game-screen {
             width: 100%;
-            height: 280px;
-            background-color: #111;
-            border-radius: 8px;
-            border: 1px solid #333;
+            height: 310px;
+            background-color: #080808;
+            border-radius: 12px;
+            border: 2px solid #222;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
         }
 
         .demo-controls {
             width: 100%;
-            margin-top: 15px;
+            margin-top: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #121212;
-            padding: 12px 15px;
-            border-radius: 8px;
-            border: 1px solid #222;
+            background: #101010;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid #262626;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 14px;
         }
 
         .saldo-demo {
-            font-size: 14px;
-            color: #aaa;
+            font-size: 13px;
+            color: #888;
         }
 
         .saldo-demo strong {
             color: #00ff00;
-            font-size: 15px;
+            font-size: 16px;
+            text-shadow: 0 0 6px rgba(0, 255, 0, 0.4);
         }
 
         .aposta-input-box {
             display: flex;
             align-items: center;
             gap: 8px;
-            background-color: #000;
+            background-color: #050505;
             border: 1px solid #00ff00;
-            padding: 5px 10px;
-            border-radius: 6px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 255, 0, 0.15);
         }
 
         .aposta-input-box label {
             color: #aaa;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
+            text-transform: uppercase;
         }
 
         .aposta-input-box input {
             background: transparent;
             border: none;
             color: #00ff00;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
-            width: 70px;
+            width: 75px;
             outline: none;
         }
 
         .btn-acao-demo {
-            background-color: #00ff00;
+            background: linear-gradient(135deg, #00ff00, #00aa00);
             color: #000;
             border: none;
-            padding: 10px 20px;
-            font-weight: bold;
+            padding: 12px 24px;
+            font-weight: 800;
             font-size: 14px;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             text-transform: uppercase;
-            transition: 0.2s;
+            transition: all 0.2s;
             width: 100%;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+            letter-spacing: 0.5px;
         }
 
-        @media (min-width: 550px) {
+        @media (min-width: 580px) {
             .btn-acao-demo {
                 width: auto;
             }
         }
 
         .btn-acao-demo:hover {
-            background-color: #00cc00;
-            transform: scale(1.02);
+            filter: brightness(1.15);
+            transform: translateY(-2px);
+            box-shadow: 0 0 22px rgba(0, 255, 0, 0.65);
         }
 
+        /* ANIMAÇÃO DOS CILINDROS */
         .slots-grid {
             display: flex;
-            gap: 12px;
+            gap: 15px;
         }
 
-        .reel {
-            width: 65px;
-            height: 85px;
-            background: #222;
+        .reel-container {
+            width: 80px;
+            height: 100px;
+            background: linear-gradient(180deg, #151515, #080808);
             border: 2px solid #00ff00;
-            border-radius: 8px;
+            border-radius: 10px;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 34px;
-            box-shadow: inset 0 0 10px #000;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.9), 0 0 10px rgba(0,255,0,0.2);
+            position: relative;
         }
 
-        .roleta-box {
-            font-size: 55px;
+        .reel-inner {
+            font-size: 38px;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reel-inner img {
+            width: 45px;
+            height: 45px;
+        }
+
+        .msg-premio {
+            margin-top: 18px;
             font-weight: bold;
+            min-height: 24px;
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 10px rgba(0,255,0,0.5);
+        }
+
+        /* ROLETA EUROPEIA */
+        .roleta-mesa-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .roleta-wheel-outer {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #111 0deg 30deg, #cc0000 30deg 60deg, #222 60deg 90deg, #00aa00 90deg 120deg, #111 120deg 150deg, #cc0000 150deg 180deg, #222 180deg 210deg, #cc0000 210deg 240deg, #111 240deg 270deg, #00aa00 270deg 300deg, #222 300deg 330deg, #cc0000 330deg 360deg);
+            border: 5px solid #00ff00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 35px rgba(0, 255, 0, 0.45), inset 0 0 20px rgba(0, 0, 0, 0.9);
+            position: relative;
+        }
+
+        .roleta-wheel-inner {
+            width: 110px;
+            height: 110px;
+            background-color: #0b0b0b;
+            border-radius: 50%;
+            border: 2px dashed #00ff00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 15px rgba(0,255,0,0.3);
+        }
+
+        .roleta-valor-central {
+            font-size: 38px;
+            font-weight: 900;
             color: #00ff00;
+            text-shadow: 0 0 12px rgba(0,255,0,0.8);
+        }
+
+        .roleta-girando-animation {
+            animation: spinWheel 0.2s infinite linear;
+        }
+
+        @keyframes spinWheel {
+            0% { transform: rotate(0deg) scale(1); filter: brightness(1); }
+            50% { transform: rotate(180deg) scale(1.04); filter: brightness(1.3); }
+            100% { transform: rotate(360deg) scale(1); filter: brightness(1); }
         }
     </style>
 </head>
@@ -484,18 +603,18 @@
         <!-- BANNER MODOS DEMO -->
         <div class="banner-demo">
             <div>
-                <h2>🎮 Modo Demonstrativo Habilitado</h2>
-                <p>Experimente todos os nossos jogos com saldo fictício de <strong>R$ 1.000,00</strong> para treinar antes de apostar valendo dinheiro!</p>
+                <h2><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3ae.png" class="apple-emoji" alt="🎮"> Modo Demonstrativo Habilitado</h2>
+                <p>Experimente todos os nossos jogos com saldo fictício de <strong>R$ 1.000,00</strong> em tempo real!</p>
             </div>
             <span class="badge-demo">Saldo Demo Grátis</span>
         </div>
 
         <!-- FILTROS DE JOGO -->
         <div class="categorias-bar">
-            <button class="btn-cat ativo" onclick="filtrar('todos', event)">🔥 Todos os Jogos</button>
-            <button class="btn-cat" onclick="filtrar('slots', event)">🎰 Slots / Fortune</button>
-            <button class="btn-cat" onclick="filtrar('crash', event)">🚀 Crash Games</button>
-            <button class="btn-cat" onclick="filtrar('cassino', event)">🎲 Cassino ao Vivo</button>
+            <button class="btn-cat ativo" onclick="filtrar('todos', event)"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f525.png" class="apple-emoji" alt="🔥"> Todos os Jogos</button>
+            <button class="btn-cat" onclick="filtrar('slots', event)"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3b0.png" class="apple-emoji" alt="🎰"> Slots / Fortune</button>
+            <button class="btn-cat" onclick="filtrar('crash', event)"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f680.png" class="apple-emoji" alt="🚀"> Crash Games</button>
+            <button class="btn-cat" onclick="filtrar('cassino', event)"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3b2.png" class="apple-emoji" alt="🎲"> Cassino ao Vivo</button>
         </div>
 
         <!-- GRID DE JOGOS -->
@@ -503,64 +622,64 @@
             
             <!-- FORTUNE TIGER -->
             <div class="card-jogo" data-categoria="slots">
-                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), radial-gradient(circle, #ff9900 0%, #330000 100%);">
+                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), radial-gradient(circle, #ff9900 0%, #330000 100%);">
                     <span class="tag-modalidade">Slots</span>
                     <div class="icone-play" onclick="abrirModalDemo('tiger')">▶</div>
                 </div>
                 <div class="info-jogo">
                     <h3>Fortune Tiger</h3>
-                    <p>O jogo do Tigre! Multiplicadores e bônus incríveis em cada rodada.</p>
+                    <p>O jogo do Tigre! Multiplicadores e bônus dinâmicos em cada rodada.</p>
                     <div class="botoes-card">
-                        <button class="btn-play-demo" onclick="abrirModalDemo('tiger')">🎮 Testar Demo</button>
-                        <button class="btn-play-real" onclick="alertaSemSaldo()">💰 Jogar Real</button>
+                        <button class="btn-play-demo" onclick="abrirModalDemo('tiger')"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3ae.png" class="apple-emoji" alt="🎮"> Testar Demo</button>
+                        <button class="btn-play-real" onclick="alertaSemSaldo()"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f4b0.png" class="apple-emoji" alt="💰"> Jogar Real</button>
                     </div>
                 </div>
             </div>
 
             <!-- AVIATOR -->
             <div class="card-jogo" data-categoria="crash">
-                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), radial-gradient(circle, #ff0055 0%, #220000 100%);">
+                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), radial-gradient(circle, #ff0055 0%, #220000 100%);">
                     <span class="tag-modalidade">Crash Game</span>
                     <div class="icone-play" onclick="abrirModalDemo('aviator')">▶</div>
                 </div>
                 <div class="info-jogo">
                     <h3>Aviator Crash</h3>
-                    <p>Decole o avião e retire seus lucros antes que ele voe longe!</p>
+                    <p>Decole o avião em tempo real e retire seus lucros antes do crash!</p>
                     <div class="botoes-card">
-                        <button class="btn-play-demo" onclick="abrirModalDemo('aviator')">🎮 Testar Demo</button>
-                        <button class="btn-play-real" onclick="alertaSemSaldo()">💰 Jogar Real</button>
+                        <button class="btn-play-demo" onclick="abrirModalDemo('aviator')"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3ae.png" class="apple-emoji" alt="🎮"> Testar Demo</button>
+                        <button class="btn-play-real" onclick="alertaSemSaldo()"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f4b0.png" class="apple-emoji" alt="💰"> Jogar Real</button>
                     </div>
                 </div>
             </div>
 
             <!-- ROLETA VIP -->
             <div class="card-jogo" data-categoria="cassino">
-                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), radial-gradient(circle, #00cc66 0%, #002200 100%);">
+                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), radial-gradient(circle, #00cc66 0%, #002200 100%);">
                     <span class="tag-modalidade">Roleta</span>
                     <div class="icone-play" onclick="abrirModalDemo('roleta')">▶</div>
                 </div>
                 <div class="info-jogo">
                     <h3>Roleta Europeia VIP</h3>
-                    <p>Aposte no vermelho, preto ou em números da sorte com alta precisão.</p>
+                    <p>Aposte com animação de precisão numéricas e multiplicadores.</p>
                     <div class="botoes-card">
-                        <button class="btn-play-demo" onclick="abrirModalDemo('roleta')">🎮 Testar Demo</button>
-                        <button class="btn-play-real" onclick="alertaSemSaldo()">💰 Jogar Real</button>
+                        <button class="btn-play-demo" onclick="abrirModalDemo('roleta')"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3ae.png" class="apple-emoji" alt="🎮"> Testar Demo</button>
+                        <button class="btn-play-real" onclick="alertaSemSaldo()"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f4b0.png" class="apple-emoji" alt="💰"> Jogar Real</button>
                     </div>
                 </div>
             </div>
 
             <!-- FORTUNE OX -->
             <div class="card-jogo" data-categoria="slots">
-                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), radial-gradient(circle, #cc9900 0%, #1a1000 100%);">
+                <div class="capa-jogo" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), radial-gradient(circle, #cc9900 0%, #1a1000 100%);">
                     <span class="tag-modalidade">Slots</span>
-                    <div class="icone-play" onclick="abrirModalDemo('tiger')">▶</div>
+                    <div class="icone-play" onclick="abrirModalDemo('ox')">▶</div>
                 </div>
                 <div class="info-jogo">
                     <h3>Fortune Ox</h3>
-                    <p>O jogo do Touro! Recursos de giros repetidos até você ganhar.</p>
+                    <p>O jogo do Touro! Giros especiais e recursos surpresa garantidos.</p>
                     <div class="botoes-card">
-                        <button class="btn-play-demo" onclick="abrirModalDemo('tiger')">🎮 Testar Demo</button>
-                        <button class="btn-play-real" onclick="alertaSemSaldo()">💰 Jogar Real</button>
+                        <button class="btn-play-demo" onclick="abrirModalDemo('ox')"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3ae.png" class="apple-emoji" alt="🎮"> Testar Demo</button>
+                        <button class="btn-play-real" onclick="alertaSemSaldo()"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f4b0.png" class="apple-emoji" alt="💰"> Jogar Real</button>
                     </div>
                 </div>
             </div>
@@ -596,16 +715,36 @@
         </div>
     </div>
 
-    <!-- SCRIPTS DE JOGABILIDADE E INTERAÇÃO -->
+    <!-- SCRIPTS COM EMOJIS DIRETO DO TWEMOJI DA APPLE EM PNG -->
     <script>
         let saldoDemo = 1000;
         let rodandoAviator = false;
         let tipoJogoAtual = '';
 
+        // Códigos HEX das imagens oficiais do Twemoji (Apple Style)
+        const imgTiger = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f42f.png';
+        const imgOx = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f402.png';
+        const imgOrange = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f34a.png';
+        const imgDiamond = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f48e.png';
+        const imgCoin = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1fa99.png';
+        const imgRedEnvelope = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f9e7.png';
+        const imgMoneyBag = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f4b0.png';
+        const imgStar = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2b50.png';
+        const imgLantern = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3ee.png';
+        const imgBell = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f514.png';
+        const imgPlane = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2708.png';
+        const imgParty = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f389.png';
+        const imgSparkles = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2728.png';
+        const imgCross = 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/274c.png';
+
         function alertaSemSaldo() {
             if (confirm("Você não possui saldo real para jogar nesta modalidade.\nDeseja realizar um depósito agora?")) {
                 window.location.href = "pagamento.html";
             }
+        }
+
+        function atualizarSaldo() {
+            document.getElementById('saldo_demo_val').textContent = `R$ ${saldoDemo.toFixed(2).replace('.', ',')}`;
         }
 
         function filtrar(categoria, evt) {
@@ -614,7 +753,8 @@
 
             btns.forEach(b => b.classList.remove('ativo'));
             if (evt && evt.target) {
-                evt.target.classList.add('ativo');
+                const targetBtn = evt.target.closest('button');
+                if(targetBtn) targetBtn.classList.add('ativo');
             }
 
             cards.forEach(card => {
@@ -638,13 +778,17 @@
             const valAposta = obterValorAposta();
             const btnAcao = document.getElementById('btn_acao_jogo');
 
-            if (tipoJogoAtual === 'tiger') {
-                btnAcao.textContent = `🎰 GIRAR (R$ ${valAposta})`;
+            if (tipoJogoAtual === 'tiger' || tipoJogoAtual === 'ox') {
+                btnAcao.innerHTML = `<img src="${imgSlotIcon()}" class="apple-emoji" alt="🎰"> GIRAR (R$ ${valAposta})`;
             } else if (tipoJogoAtual === 'aviator' && !rodandoAviator) {
-                btnAcao.textContent = `🚀 DECOLAR (R$ ${valAposta})`;
+                btnAcao.innerHTML = `<img src="${imgPlane}" class="apple-emoji" alt="🚀"> DECOLAR (R$ ${valAposta})`;
             } else if (tipoJogoAtual === 'roleta') {
-                btnAcao.textContent = `🎲 RODAR ROLETA (R$ ${valAposta})`;
+                btnAcao.innerHTML = `<img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3b2.png" class="apple-emoji" alt="🎲"> RODAR ROLETA (R$ ${valAposta})`;
             }
+        }
+
+        function imgSlotIcon() {
+            return tipoJogoAtual === 'tiger' ? imgTiger : imgOx;
         }
 
         function abrirModalDemo(tipoJogo) {
@@ -655,36 +799,55 @@
             const btnAcao = document.getElementById('btn_acao_jogo');
 
             modal.classList.add('ativo');
+            rodandoAviator = false;
 
             if (tipoJogo === 'tiger') {
-                titulo.innerHTML = '🐯 Fortune Tiger <span>MODO DEMO</span>';
+                titulo.innerHTML = `<img src="${imgTiger}" class="apple-emoji" alt="🐯"> Fortune Tiger <span>MODO DEMO</span>`;
                 tela.innerHTML = `
                     <div class="slots-grid">
-                        <div class="reel" id="r1">🐯</div>
-                        <div class="reel" id="r2">🍊</div>
-                        <div class="reel" id="r3">💎</div>
+                        <div class="reel-container"><div class="reel-inner" id="r1"><img src="${imgTiger}" alt="tiger"></div></div>
+                        <div class="reel-container"><div class="reel-inner" id="r2"><img src="${imgOrange}" alt="orange"></div></div>
+                        <div class="reel-container"><div class="reel-inner" id="r3"><img src="${imgDiamond}" alt="diamond"></div></div>
                     </div>
-                    <p id="msg_resultado" style="margin-top:15px; color:#00ff00; font-weight:bold; min-height:20px; text-align:center; font-size: 13px;"></p>
+                    <p class="msg-premio" id="msg_resultado" style="color:#00ff00;">Faça sua aposta e gire os cilindros!</p>
                 `;
-                btnAcao.onclick = girarSlots;
-            } else if (tipoJogo === 'aviator') {
-                titulo.innerHTML = '🚀 Aviator Crash <span>MODO DEMO</span>';
+                btnAcao.onclick = girarSlotsTiger;
+            } else if (tipoJogo === 'ox') {
+                titulo.innerHTML = `<img src="${imgOx}" class="apple-emoji" alt="🐂"> Fortune Ox <span>MODO DEMO</span>`;
                 tela.innerHTML = `
-                    <div style="text-align:center;">
-                        <h1 id="mult_aviator" style="font-size: 50px; color:#00ff00;">1.00x</h1>
-                        <p id="status_aviator" style="color:#aaa; font-size: 13px;">Clique em DECOLAR para iniciar!</p>
+                    <div class="slots-grid">
+                        <div class="reel-container"><div class="reel-inner" id="r1"><img src="${imgOx}" alt="ox"></div></div>
+                        <div class="reel-container"><div class="reel-inner" id="r2"><img src="${imgCoin}" alt="coin"></div></div>
+                        <div class="reel-container"><div class="reel-inner" id="r3"><img src="${imgRedEnvelope}" alt="red envelope"></div></div>
+                    </div>
+                    <p class="msg-premio" id="msg_resultado" style="color:#00ff00;">O Touro da sorte está pronto!</p>
+                `;
+                btnAcao.onclick = girarSlotsOx;
+            } else if (tipoJogo === 'aviator') {
+                titulo.innerHTML = `<img src="${imgPlane}" class="apple-emoji" alt="🚀"> Aviator Crash <span>MODO DEMO</span>`;
+                tela.innerHTML = `
+                    <div style="position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <canvas id="canvas_aviator" width="480" height="230" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+                        <div style="position: relative; z-index: 2; text-align: center;">
+                            <h1 id="mult_aviator" style="font-size: 54px; color:#00ff00; text-shadow: 0 0 15px rgba(0,255,0,0.6);">1.00x</h1>
+                            <p id="status_aviator" style="color:#aaa; font-size: 13px; background: rgba(0,0,0,0.75); padding: 4px 12px; border-radius: 6px; margin-top: 6px; border: 1px solid #333;">Pronto para decolar!</p>
+                        </div>
                     </div>
                 `;
                 btnAcao.onclick = iniciarAviator;
             } else if (tipoJogo === 'roleta') {
-                titulo.innerHTML = '🎲 Roleta VIP <span>MODO DEMO</span>';
+                titulo.innerHTML = `<img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3b2.png" class="apple-emoji" alt="🎲"> Roleta Europeia VIP <span>MODO DEMO</span>`;
                 tela.innerHTML = `
-                    <div style="text-align:center;">
-                        <div class="roleta-box" id="num_roleta">❓</div>
-                        <p id="msg_roleta" style="color:#aaa; margin-top:10px; font-size: 13px;">Aposte no Vermelho ou Preto!</p>
+                    <div class="roleta-mesa-container">
+                        <div class="roleta-wheel-outer" id="caixa_roleta_ruroda">
+                            <div class="roleta-wheel-inner">
+                                <span class="roleta-valor-central" id="num_roleta">?</span>
+                            </div>
+                        </div>
+                        <p class="msg-premio" id="msg_roleta" style="color:#aaa;">Faça sua aposta e rode a roleta europeia!</p>
                     </div>
                 `;
-                btnAcao.onclick = rodarRoleta;
+                btnAcao.onclick = rodarRoletaEuropeia;
             }
 
             atualizarTextoBotao();
@@ -697,45 +860,128 @@
             rodandoAviator = false;
         }
 
-        function girarSlots() {
+        function girarSlotsTiger() {
             const valAposta = obterValorAposta();
-
             if (saldoDemo < valAposta) { alert('Saldo Demo insuficiente!'); return; }
             saldoDemo -= valAposta;
             atualizarSaldo();
 
-            const simbolos = ['🐯', '🍊', '💎', '🧧', '💰'];
+            const simbolos = [
+                { url: imgTiger, nome: 'tiger' },
+                { url: imgOrange, nome: 'orange' },
+                { url: imgDiamond, nome: 'diamond' },
+                { url: imgRedEnvelope, nome: 'envelope' },
+                { url: imgMoneyBag, nome: 'money' },
+                { url: imgStar, nome: 'star' }
+            ];
+
             const r1 = document.getElementById('r1');
             const r2 = document.getElementById('r2');
             const r3 = document.getElementById('r3');
             const msg = document.getElementById('msg_resultado');
 
-            msg.textContent = "Girando...";
+            msg.textContent = "Girando cilindros...";
+            msg.style.color = "#00ff00";
 
-            let tempo = 0;
+            let contador = 0;
             const intervalo = setInterval(() => {
-                r1.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
-                r2.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
-                r3.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
-                tempo += 100;
+                const s1 = simbolos[Math.floor(Math.random() * simbolos.length)];
+                const s2 = simbolos[Math.floor(Math.random() * simbolos.length)];
+                const s3 = simbolos[Math.floor(Math.random() * simbolos.length)];
 
-                if (tempo >= 1200) {
+                r1.innerHTML = `<img src="${s1.url}" alt="${s1.nome}">`;
+                r2.innerHTML = `<img src="${s2.url}" alt="${s2.nome}">`;
+                r3.innerHTML = `<img src="${s3.url}" alt="${s3.nome}">`;
+                
+                contador++;
+                if (contador > 18) {
                     clearInterval(intervalo);
-                    if (r1.textContent === r2.textContent && r2.textContent === r3.textContent) {
-                        const premio = valAposta * 10;
+                    const res1 = simbolos[Math.floor(Math.random() * simbolos.length)];
+                    const res2 = simbolos[Math.floor(Math.random() * simbolos.length)];
+                    const res3 = simbolos[Math.floor(Math.random() * simbolos.length)];
+
+                    r1.innerHTML = `<img src="${res1.url}" alt="${res1.nome}">`;
+                    r2.innerHTML = `<img src="${res2.url}" alt="${res2.nome}">`;
+                    r3.innerHTML = `<img src="${res3.url}" alt="${res3.nome}">`;
+
+                    if (res1.nome === res2.nome && res2.nome === res3.nome) {
+                        const premio = valAposta * 12;
                         saldoDemo += premio;
                         atualizarSaldo();
-                        msg.textContent = `🎉 SUPER WIN! Ganhou R$ ${premio.toFixed(2)}!`;
-                    } else if (r1.textContent === r2.textContent || r2.textContent === r3.textContent) {
+                        msg.innerHTML = `<img src="${imgParty}" class="apple-emoji" alt="🎉"> <span style="font-size:15px;">MEGA JACKPOT TIGER!</span> Ganhou R$ ${premio.toFixed(2)}!`;
+                    } else if (res1.nome === res2.nome || res2.nome === res3.nome || res1.nome === res3.nome) {
                         const premio = valAposta * 2.5;
                         saldoDemo += premio;
                         atualizarSaldo();
-                        msg.textContent = `✨ GANHOU! Dupla: R$ ${premio.toFixed(2)}!`;
+                        msg.innerHTML = `<img src="${imgSparkles}" class="apple-emoji" alt="✨"> BOA! Dupla premiada: R$ ${premio.toFixed(2)}!`;
                     } else {
-                        msg.textContent = "❌ Tente novamente!";
+                        msg.innerHTML = `<img src="${imgCross}" class="apple-emoji" alt="❌"> Não foi dessa vez, tente novamente!`;
+                        msg.style.color = "#ff4444";
                     }
                 }
-            }, 100);
+            }, 70);
+        }
+
+        function girarSlotsOx() {
+            const valAposta = obterValorAposta();
+            if (saldoDemo < valAposta) { alert('Saldo Demo insuficiente!'); return; }
+            saldoDemo -= valAposta;
+            atualizarSaldo();
+
+            const simbolos = [
+                { url: imgOx, nome: 'ox' },
+                { url: imgCoin, nome: 'coin' },
+                { url: imgRedEnvelope, nome: 'envelope' },
+                { url: imgLantern, nome: 'lantern' },
+                { url: imgBell, nome: 'bell' },
+                { url: imgDiamond, nome: 'diamond' }
+            ];
+
+            const r1 = document.getElementById('r1');
+            const r2 = document.getElementById('r2');
+            const r3 = document.getElementById('r3');
+            const msg = document.getElementById('msg_resultado');
+
+            msg.textContent = "O Touro está avançando...";
+            msg.style.color = "#00ff00";
+
+            let contador = 0;
+            const intervalo = setInterval(() => {
+                const s1 = simbolos[Math.floor(Math.random() * simbolos.length)];
+                const s2 = simbolos[Math.floor(Math.random() * simbolos.length)];
+                const s3 = simbolos[Math.floor(Math.random() * simbolos.length)];
+
+                r1.innerHTML = `<img src="${s1.url}" alt="${s1.nome}">`;
+                r2.innerHTML = `<img src="${s2.url}" alt="${s2.nome}">`;
+                r3.innerHTML = `<img src="${s3.url}" alt="${s3.nome}">`;
+
+                contador++;
+                if (contador > 18) {
+                    clearInterval(intervalo);
+                    const res1 = simbolos[Math.floor(Math.random() * simbolos.length)];
+                    const res2 = simbolos[Math.floor(Math.random() * simbolos.length)];
+                    const res3 = simbolos[Math.floor(Math.random() * simbolos.length)];
+
+                    r1.innerHTML = `<img src="${res1.url}" alt="${res1.nome}">`;
+                    r2.innerHTML = `<img src="${res2.url}" alt="${res2.nome}">`;
+                    r3.innerHTML = `<img src="${res3.url}" alt="${res3.nome}">`;
+
+                    if (res1.nome === res2.nome && res2.nome === res3.nome) {
+                        const premio = valAposta * 18;
+                        saldoDemo += premio;
+                        atualizarSaldo();
+                        msg.innerHTML = `<img src="${imgOx}" class="apple-emoji" alt="🐂"> <span style="font-size:15px;">SUPER VITÓRIA DO TOURO!</span> R$ ${premio.toFixed(2)}!`;
+                    } else if (res1.nome === res2.nome || res2.nome === res3.nome || res1.nome === res3.nome) {
+                        const premio = valAposta * 3;
+                        saldoDemo += premio;
+                        atualizarSaldo();
+                        msg.innerHTML = `<img src="${imgSparkles}" class="apple-emoji" alt="✨"> Vitória parcial: R$ ${premio.toFixed(2)}!`;
+                    } else {
+                        msg.innerHTML = `<img src="${imgCross}" class="apple-emoji" alt="❌"> O Touro passou direto!`;
+                        msg.style.color = "#ff4444";
+                    }
+                }
+            }, 70);
         }
 
         function iniciarAviator() {
@@ -751,27 +997,57 @@
             const multElem = document.getElementById('mult_aviator');
             const statusElem = document.getElementById('status_aviator');
             const btnAcao = document.getElementById('btn_acao_jogo');
+            const canvas = document.getElementById('canvas_aviator');
+            const ctx = canvas.getContext('2d');
 
             multElem.style.color = '#00ff00';
             let mult = 1.00;
-            const crashPonto = (Math.random() * 4 + 1.1).toFixed(2);
+            const crashPonto = parseFloat((Math.random() * 4.5 + 1.25).toFixed(2));
             
-            statusElem.textContent = "✈️ Avião voando...";
-            btnAcao.textContent = "💰 RETIRAR GANHO";
+            statusElem.innerHTML = `<img src="${imgPlane}" class="apple-emoji" alt="🚀"> Avião em voo ascendente...`;
+            btnAcao.innerHTML = `<img src="${imgMoneyBag}" class="apple-emoji" alt="💰"> RETIRAR LUCRO`;
+
+            let progressoX = 0;
 
             const timer = setInterval(() => {
-                mult += 0.05;
+                mult += 0.018;
+                progressoX += 4;
+
+                if (mult >= crashPonto || progressoX >= canvas.width - 20) {
+                    mult = crashPonto;
+                    clearInterval(timer);
+                    multElem.textContent = mult.toFixed(2) + 'x';
+                    multElem.style.color = '#ff3333';
+                    statusElem.innerHTML = `💥 CRASH! O avião voou em ${mult.toFixed(2)}x!`;
+                    rodandoAviator = false;
+                    
+                    btnAcao.innerHTML = `<img src="${imgPlane}" class="apple-emoji" alt="🚀"> DECOLAR (R$ ${valAposta})`;
+                    btnAcao.onclick = iniciarAviator;
+                    return;
+                }
+
                 multElem.textContent = mult.toFixed(2) + 'x';
 
-                if (mult >= crashPonto) {
-                    clearInterval(timer);
-                    multElem.style.color = '#ff3333';
-                    statusElem.textContent = `💥 CRASH! O avião voou em ${crashPonto}x!`;
-                    rodandoAviator = false;
-                    atualizarTextoBotao();
-                    btnAcao.onclick = iniciarAviator;
-                }
-            }, 100);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.beginPath();
+                ctx.moveTo(10, canvas.height - 10);
+                let currentY = canvas.height - (progressoX * 0.48);
+                if (currentY < 15) currentY = 15;
+                ctx.quadraticCurveTo(progressoX * 0.5, canvas.height - 15, progressoX, currentY);
+                ctx.strokeStyle = '#00ff00';
+                ctx.lineWidth = 3.5;
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = '#00ff00';
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                ctx.lineTo(progressoX, canvas.height - 10);
+                ctx.lineTo(10, canvas.height - 10);
+                ctx.fillStyle = 'rgba(0, 255, 0, 0.12)';
+                ctx.fill();
+
+            }, 70);
 
             btnAcao.onclick = () => {
                 if (rodandoAviator) {
@@ -780,50 +1056,56 @@
                     saldoDemo += ganho;
                     atualizarSaldo();
                     multElem.style.color = '#00ff00';
-                    statusElem.textContent = `✅ RETIRADO! Ganho de R$ ${ganho.toFixed(2)}!`;
+                    statusElem.innerHTML = `✅ RESGATE COM SUCESSO! +R$ ${ganho.toFixed(2)}`;
                     rodandoAviator = false;
-                    atualizarTextoBotao();
+                    
+                    btnAcao.innerHTML = `<img src="${imgPlane}" class="apple-emoji" alt="🚀"> DECOLAR (R$ ${valAposta})`;
                     btnAcao.onclick = iniciarAviator;
                 }
             };
         }
 
-        function rodarRoleta() {
+        function rodarRoletaEuropeia() {
             const valAposta = obterValorAposta();
-
             if (saldoDemo < valAposta) { alert('Saldo Demo insuficiente!'); return; }
             saldoDemo -= valAposta;
             atualizarSaldo();
 
             const numElem = document.getElementById('num_roleta');
             const msgElem = document.getElementById('msg_roleta');
+            const rodaContainer = document.getElementById('caixa_roleta_ruroda');
             
-            msgElem.textContent = "Girando a roleta...";
-            let giros = 0;
+            rodaContainer.classList.add('roleta-girando-animation');
+            msgElem.textContent = "Girando a roda europeia...";
+            msgElem.style.color = "#00ff00";
 
+            let giros = 0;
             const timer = setInterval(() => {
                 numElem.textContent = Math.floor(Math.random() * 37);
                 giros++;
 
-                if (giros > 15) {
+                if (giros > 22) {
                     clearInterval(timer);
+                    rodaContainer.classList.remove('roleta-girando-animation');
+                    
                     const finalNum = Math.floor(Math.random() * 37);
                     numElem.textContent = finalNum;
                     
-                    if (finalNum % 2 === 0 && finalNum !== 0) {
+                    if (finalNum !== 0 && finalNum % 2 === 0) {
                         const ganho = valAposta * 2;
                         saldoDemo += ganho;
                         atualizarSaldo();
-                        msgElem.textContent = `🔴 Número ${finalNum} (PAR) - Ganhou R$ ${ganho.toFixed(2)}!`;
+                        msgElem.innerHTML = `🔴 Número ${finalNum} (PAR) - <span style="color:#00ff00;">Ganhou R$ ${ganho.toFixed(2)}!</span>`;
+                    } else if (finalNum !== 0) {
+                        const ganho = valAposta * 2;
+                        saldoDemo += ganho;
+                        atualizarSaldo();
+                        msgElem.innerHTML = `⚫ Número ${finalNum} (ÍMPAR) - <span style="color:#00ff00;">Ganhou R$ ${ganho.toFixed(2)}!</span>`;
                     } else {
-                        msgElem.textContent = `⚫ Número ${finalNum} (ÍMPAR) - Tente na próxima!`;
+                        msgElem.innerHTML = `🟢 Número 0 (ZERO) - <span style="color:#ff4444;">A casa venceu!</span>`;
                     }
                 }
-            }, 80);
-        }
-
-        function atualizarSaldo() {
-            document.getElementById('saldo_demo_val').textContent = `R$ ${saldoDemo.toFixed(2).replace('.', ',')}`;
+            }, 60);
         }
     </script>
 </body>

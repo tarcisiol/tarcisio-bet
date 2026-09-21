@@ -283,14 +283,11 @@
 
     <header>
         <div class="logo-container">
-            <a href="dashboard.html"><img src="logo da bet.png" alt="Logo Tarcisio BET" fetchpriority="high"></a>
+            <a href="dashboard.html" id="logoLink"><img src="logo da bet.png" alt="Logo Tarcisio BET" fetchpriority="high"></a>
         </div>
         
-        <nav class="menu-navegacao">
-            <a class="btn-inicio" href="dashboard.html">Painel</a>
-            <a class="btn-inicio" href="jogos.html">Jogos</a>
-            <a class="btn-inicio" href="pagamento.html">Depositar</a>
-            <a class="btn-inicio" href="suporte.html" style="color: #00ff00 !important;">Suporte</a>
+        <!-- O menu será ajustado automaticamente via JavaScript -->
+        <nav class="menu-navegacao" id="menuNavegacao">
         </nav>
     </header>
 
@@ -305,13 +302,13 @@
 
         <!-- CANAIS DE CONTATO RÁPIDO -->
         <div class="grid-canais">
-            <a href="https://wa.me/5500000000000" target="_blank" class="card-canal">
+            <a href="https://wa.me/5585996797112" target="_blank" class="card-canal">
                 <div class="icone-canal">💬</div>
                 <h3>Chat via WhatsApp</h3>
                 <p>Atendimento imediato com nossa equipe</p>
             </a>
 
-            <a href="mailto:suporte@tarcisiobet.com" class="card-canal">
+            <a href="mailto:tarcisiol2008@gmail.com" class="card-canal">
                 <div class="icone-canal">📧</div>
                 <h3>E-mail de Suporte</h3>
                 <p>tarcisiol2008@gmail.com</p>
@@ -392,36 +389,72 @@
             </form>
         </div>
 
-        <a href="dashboard.html" class="btn-voltar">← Voltar para o Painel Principal</a>
+        <a href="#" id="linkVoltar" class="btn-voltar">← Voltar para o Painel Principal</a>
 
     </main>
 
-    <!-- SCRIPTS DE INTERAÇÃO -->
+    <!-- SCRIPTS DE INTERAÇÃO E VERIFICAÇÃO DE LOGIN -->
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuNav = document.getElementById('menuNavegacao');
+            const logoLink = document.getElementById('logoLink');
+            const linkVoltar = document.getElementById('linkVoltar');
+            
+            // Verifica o estado de login salvo no navegador
+            const usuarioLogado = localStorage.getItem('tarcisio_logado');
+
+            if (!usuarioLogado) {
+                // Se NÃO estiver logado
+                menuNav.innerHTML = `
+                    <a class="btn-inicio" href="index.html">Início</a>
+                    <a class="btn-inicio" href="login.html">Entrar</a>
+                    <a class="btn-inicio" href="cadastro.html" style="color: #00ff00 !important;">Cadastrar</a>
+                `;
+                if (logoLink) logoLink.href = "index.html";
+                if (linkVoltar) {
+                    linkVoltar.href = "index.html";
+                    linkVoltar.textContent = "← Voltar para a Página Inicial";
+                }
+            } else {
+                // Se ESTIVER logado
+                menuNav.innerHTML = `
+                    <a class="btn-inicio" href="dashboard.html">Painel</a>
+                    <a class="btn-inicio" href="jogos.html">Jogos</a>
+                    <a class="btn-inicio" href="pagamento.html">Depositar</a>
+                    <a class="btn-inicio" href="suporte.html" style="color: #00ff00 !important;">Suporte</a>
+                    <a class="btn-inicio" href="#" onclick="sairDaConta()" style="color: #ff3333 !important;">Sair</a>
+                `;
+                if (logoLink) logoLink.href = "dashboard.html";
+                if (linkVoltar) {
+                    linkVoltar.href = "dashboard.html";
+                    linkVoltar.textContent = "← Voltar para o Painel Principal";
+                }
+            }
+        });
+
+        function sairDaConta() {
+            localStorage.removeItem('tarcisio_logado');
+            window.location.href = 'index.html';
+        }
+
         function alternarFaq(elemento) {
-            // Fecha os outros abertos (opcional)
             const itens = document.querySelectorAll('.faq-item');
             itens.forEach(item => {
                 if (item !== elemento) {
                     item.classList.remove('ativo');
                 }
             });
-
-            // Alterna o atual
             elemento.classList.toggle('ativo');
         }
 
         function enviarMensagem(event) {
             event.preventDefault();
             
-            // Simula o envio bem-sucedido
             const msgSucesso = document.getElementById('msg_sucesso');
             msgSucesso.style.display = 'block';
 
-            // Limpa o formulário
             document.getElementById('form_contato').reset();
 
-            // Esconde a mensagem após 5 segundos
             setTimeout(() => {
                 msgSucesso.style.display = 'none';
             }, 5000);

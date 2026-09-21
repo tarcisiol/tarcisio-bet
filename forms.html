@@ -3,126 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarcisio BET - Cadastro</title>
+    <title>Tarcisio BET - Criar Conta</title>
     
-    <!-- ÍCONE DA ABA DO NAVAGADOR -->
+    <!-- ÍCONE DA ABA DO NAVEGADOR -->
     <link rel="icon" type="image/png" href="navegador.png">
     
-    <link rel="stylesheet" href="style.css">
     <style>
-        /* RESET E COR DO FUNDO DA PÁGINA TOTALMENTE PRETO */
+        /* ESTILO PARA SELEÇÃO DE TEXTO EM VERDE NEON */
+        ::selection {
+            background-color: #00ff00;
+            color: #000000;
+        }
+        ::-moz-selection {
+            background-color: #00ff00;
+            color: #000000;
+        }
+
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         html, body {
             background-color: #000000 !important;
             color: #ffffff !important;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 15px 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding-bottom: 40px;
             overflow-x: hidden;
         }
 
-        /* Centraliza a logo no topo */
+        /* CABEÇALHO E LOGO REDONDA */
         .logo-container {
             text-align: center;
-            margin-bottom: 15px;
-            padding: 0 10px;
+            padding: 20px 10px 10px 10px;
         }
 
-        /* AJUSTE FINO DA LOGO NO CABEÇALHO */
         .logo-container img {
-            width: 140px;
-            height: auto;
-            max-width: 100%;
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #00ff00;
             display: block;
             margin: 0 auto;
+            filter: drop-shadow(0 0 12px rgba(0, 255, 0, 0.4));
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Centraliza a navegação logo abaixo da logo */
+        .logo-container img:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 18px rgba(0, 255, 0, 0.7));
+        }
+
         .menu-navegacao {
             display: flex;
             justify-content: center;
             gap: 15px;
             align-items: center;
             flex-wrap: wrap;
-            padding: 0 10px;
+            padding: 10px;
         }
 
         .btn-inicio {
             color: #ffffff !important;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
             padding: 8px 16px;
-            border-radius: 5px;
-            transition: 0.2s;
-            font-size: 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 15px;
         }
 
         .btn-inicio:hover {
             color: #00ff00 !important;
-            background-color: #111111 !important;
+            background-color: rgba(0, 255, 0, 0.08);
         }
 
-        /* CAIXA DO CADASTRO RESPONSIVA */
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #222222, transparent);
+            margin: 15px 0;
+        }
+
+        /* CAIXA DE CADASTRO PREMIUM */
         .caixa-cadastro {
-            background-color: #0a0a0a !important;
-            border: 1px solid #00ff00 !important;
-            border-radius: 12px;
-            padding: 25px 20px;
+            background: linear-gradient(145deg, #080808, #030303);
+            border: 1px solid rgba(0, 255, 0, 0.25);
+            border-radius: 16px;
+            padding: 35px 30px;
             width: 92%;
             max-width: 520px;
             margin: 25px auto;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.15);
+            box-shadow: 0 0 35px rgba(0, 255, 0, 0.08), inset 0 0 15px rgba(0, 255, 0, 0.02);
+            position: relative;
+        }
+
+        .caixa-cadastro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15%;
+            width: 70%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff00, transparent);
         }
 
         .caixa-cadastro h1 {
-            margin-top: 0;
             text-align: center;
             color: #00ff00 !important;
             text-transform: uppercase;
-            font-size: 22px;
-            margin-bottom: 20px;
+            font-size: 24px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
         }
 
-        /* ESTILIZAÇÃO DOS CAMPOS DE TEXTO E SELECT */
+        .subtitulo-cadastro {
+            text-align: center;
+            color: #888888;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        /* CAMPOS DO FORMULÁRIO */
         .label-campo {
             display: block;
             margin-bottom: 6px;
-            font-size: 14px;
+            font-size: 13px;
             color: #cccccc !important;
+            font-weight: 500;
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 16px;
         }
 
         input[type="text"],
         input[type="email"],
         input[type="password"] {
             width: 100%;
-            padding: 12px;
-            background-color: #121212 !important;
-            border: 1px solid #333333 !important;
-            border-radius: 6px;
+            padding: 13px 15px;
+            background-color: #101010 !important;
+            border: 1px solid #262626 !important;
+            border-radius: 8px;
             color: #ffffff !important;
-            font-size: 16px; /* Evita zoom automático em iOS */
-            margin-bottom: 15px;
+            font-size: 15px;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.3s ease;
         }
 
         input[type="text"]:focus,
         input[type="email"]:focus,
         input[type="password"]:focus {
             border-color: #00ff00 !important;
+            background-color: #141414 !important;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.15);
         }
 
-        /* CHECKBOX DE TERMOS */
+        /* BOTÃO MOSTRAR/OCULTAR SENHA */
+        .btn-mostrar-senha {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #777777;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .btn-mostrar-senha:hover {
+            color: #00ff00;
+        }
+
+        /* TERMOS E CONDIÇÕES */
         .container-termos {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 15px 0 20px 0;
-            font-size: 14px;
-            color: #cccccc;
+            gap: 12px;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #bbbbbb;
         }
 
         .container-termos input[type="checkbox"] {
@@ -136,64 +202,86 @@
         .container-termos a {
             color: #00ff00;
             text-decoration: none;
+            transition: 0.2s;
         }
 
         .container-termos a:hover {
             text-decoration: underline;
         }
 
-        /* MENSAGEM DE ERRO */
+        /* MENSAGENS DE ERRO */
         .mensagem-erro {
-            color: #ff3333;
-            font-size: 13px;
+            color: #ff4d4d;
+            font-size: 12px;
             font-weight: bold;
             margin-top: -10px;
             margin-bottom: 15px;
             display: none;
+            animation: fadeIn 0.3s ease;
         }
 
-        hr {
-            border: 0;
-            height: 1px;
-            background: #222222 !important;
-            margin: 20px 0;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-3px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* BOTÃO CONFIRMAR */
+        /* BOTÃO DE SUBMIT COM ESTILO DEGRADÊ NEON */
         button[type="submit"] {
             width: 100%;
-            background-color: #00ff00 !important;
+            background: linear-gradient(135deg, #00ff00, #00cc00) !important;
             color: #000000 !important;
             border: none !important;
             padding: 15px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 16px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 15px;
             cursor: pointer;
             text-transform: uppercase;
-            transition: background-color 0.2s, transform 0.1s;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 0, 0.25);
         }
 
         button[type="submit"]:hover {
-            background-color: #00cc00 !important;
-            transform: scale(1.01);
-            box-shadow: 0 0 12px rgba(0, 255, 0, 0.4);
+            background: linear-gradient(135deg, #1aff1a, #00e600) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 0, 0.4);
         }
 
-        /* AJUSTES PARA DISPOSITIVOS PEQUENOS */
-        @media (max-width: 400px) {
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        /* RODAPÉ DA CAIXA */
+        .login-link-container {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #888888;
+        }
+
+        .login-link-container a {
+            color: #00ff00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link-container a:hover {
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 480px) {
             .caixa-cadastro {
-                padding: 20px 12px;
+                padding: 25px 18px;
                 width: 95%;
             }
-
-            .btn-inicio {
-                font-size: 14px;
-                padding: 6px 10px;
-            }
-
             .caixa-cadastro h1 {
-                font-size: 19px;
+                font-size: 21px;
+            }
+            .logo-container img {
+                width: 110px;
+                height: 110px;
             }
         }
     </style>
@@ -202,63 +290,128 @@
 
     <header>
         <div class="logo-container">
-            <a href="index.html">
+            <a href="index.html" id="logoLink">
                 <img src="logo da bet.png" alt="Logo Tarcisio BET" fetchpriority="high">
             </a>
         </div>
         
-        <nav class="menu-navegacao">
-            <a class="btn-inicio" href="index.html">Início</a>
-            <a class="btn-inicio" href="forms.html">Cadastre-se</a>
-            <a class="btn-inicio" href="suporte.html">Suporte</a>
+        <nav class="menu-navegacao" id="menuNavegacao">
+            <!-- Gerenciado dinamicamente pelo script -->
         </nav>
     </header>
+
+    <hr>
     
     <main>
         <div class="caixa-cadastro">
-            <h1>Criar Nova Conta</h1>
+            <h1>Criar Conta</h1>
+            <p class="subtitulo-cadastro">Preencha seus dados para começar a apostar</p>
             
-            <form id="form_cadastro" action="dashboard.html" method="POST">
+            <form id="form_cadastro">
 
-                <label class="label-campo" for="campo_nome">Nome:</label>
-                <input id="campo_nome" name="nome" type="text" placeholder="Digite seu nome" required>
+                <label class="label-campo" for="campo_nome">Nome</label>
+                <div class="input-wrapper">
+                    <input id="campo_nome" name="nome" type="text" placeholder="Seu primeiro nome" required>
+                </div>
 
-                <label class="label-campo" for="campo_sobrenome">Sobrenome:</label>
-                <input id="campo_sobrenome" name="sobrenome" type="text" placeholder="Digite seu sobrenome" required>
+                <label class="label-campo" for="campo_sobrenome">Sobrenome</label>
+                <div class="input-wrapper">
+                    <input id="campo_sobrenome" name="sobrenome" type="text" placeholder="Seu sobrenome completo" required>
+                </div>
 
-                <label class="label-campo" for="campo_cpf">CPF:</label>
-                <input id="campo_cpf" name="cpf" type="text" placeholder="000.000.000-00" maxlength="14" required>
+                <label class="label-campo" for="campo_cpf">CPF</label>
+                <div class="input-wrapper">
+                    <input id="campo_cpf" name="cpf" type="text" placeholder="000.000.000-00" maxlength="14" required>
+                </div>
 
-                <label class="label-campo" for="campo_data">Data de Nascimento:</label>
-                <input id="campo_data" name="data_nascimento" type="text" placeholder="DD/MM/AAAA" maxlength="10" required>
+                <label class="label-campo" for="campo_data">Data de Nascimento</label>
+                <div class="input-wrapper">
+                    <input id="campo_data" name="data_nascimento" type="text" placeholder="DD/MM/AAAA" maxlength="10" required>
+                </div>
                 <div id="erro_idade" class="mensagem-erro">🚫 Você precisa ter 18 anos ou mais para se cadastrar.</div>
 
-                <label class="label-campo" for="campo_email">E-mail:</label>
-                <input id="campo_email" name="email" type="email" placeholder="Digite seu e-mail" required>
+                <label class="label-campo" for="campo_email">E-mail</label>
+                <div class="input-wrapper">
+                    <input id="campo_email" name="email" type="email" placeholder="seu@email.com" required>
+                </div>
 
-                <label class="label-campo" for="campo_senha">Senha:</label>
-                <input id="campo_senha" name="senha" type="password" placeholder="Digite sua senha" required>
+                <label class="label-campo" for="campo_senha">Senha</label>
+                <div class="input-wrapper">
+                    <input id="campo_senha" name="senha" type="password" placeholder="Mínimo de 6 caracteres" required>
+                    <button type="button" class="btn-mostrar-senha" onclick="alternarVisibilidadeSenha('campo_senha', this)">Ver</button>
+                </div>
 
-                <label class="label-campo" for="campo_confirmar_senha">Confirmar Senha:</label>
-                <input id="campo_confirmar_senha" name="confirmar_senha" type="password" placeholder="Confirme sua senha" required>
+                <label class="label-campo" for="campo_confirmar_senha">Confirmar Senha</label>
+                <div class="input-wrapper">
+                    <input id="campo_confirmar_senha" name="confirmar_senha" type="password" placeholder="Repita sua senha" required>
+                    <button type="button" class="btn-mostrar-senha" onclick="alternarVisibilidadeSenha('campo_confirmar_senha', this)">Ver</button>
+                </div>
                 <div id="erro_senha" class="mensagem-erro">🚫 As senhas não coincidem.</div>
 
                 <div class="container-termos">
                     <input type="checkbox" id="termos" name="termos" required>
                     <label for="termos">
-                        Li e aceito os <a href="termos e condições.html" target="_blank">Termos e Condições</a>
+                        Li e concordo com os <a href="termos e condições.html" target="_blank">Termos e Condições</a>
                     </label>
                 </div>
 
-                <button type="submit">Finalizar Cadastro</button>    
+                <button type="submit">Cadastrar Agora</button> 
+                
+                <div class="login-link-container">
+                    Já tem uma conta? <a href="forms.html">Faça login</a>
+                </div>
             </form>
         </div>
     </main>
 
-    <!-- SCRIPTS DE MÁSCARAS E VALIDAÇÕES -->
+    <!-- SCRIPTS DE MÁSCARAS, VALIDAÇÕES E SESSÃO -->
     <script>
+        // Verificação automática do menu no carregamento
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuNav = document.getElementById('menuNavegacao');
+            const logoLink = document.getElementById('logoLink');
+            const usuarioLogado = localStorage.getItem('tarcisio_logado');
+
+            if (!usuarioLogado) {
+                menuNav.innerHTML = `
+                    <a class="btn-inicio" href="index.html">Início</a>
+                    <a class="btn-inicio" href="forms.html">Entrar</a>
+                    <a class="btn-inicio" href="cadastro.html" style="color: #00ff00 !important;">Cadastrar</a>
+                `;
+                if (logoLink) logoLink.href = "index.html";
+            } else {
+                menuNav.innerHTML = `
+                    <a class="btn-inicio" href="dashboard.html">Painel</a>
+                    <a class="btn-inicio" href="jogos.html">Jogos</a>
+                    <a class="btn-inicio" href="pagamento.html">Depositar</a>
+                    <a class="btn-inicio" href="suporte.html">Suporte</a>
+                    <a class="btn-inicio" href="#" onclick="sairDaConta()" style="color: #ff3333 !important;">Sair</a>
+                `;
+                if (logoLink) logoLink.href = "dashboard.html";
+            }
+        });
+
+        function sairDaConta() {
+            localStorage.removeItem('tarcisio_logado');
+            window.location.href = 'index.html';
+        }
+
+        // Função para mostrar/esconder senha
+        function alternarVisibilidadeSenha(idCampo, botao) {
+            const campo = document.getElementById(idCampo);
+            if (campo.type === "password") {
+                campo.type = "text";
+                botao.textContent = "Ocultar";
+            } else {
+                campo.type = "password";
+                botao.textContent = "Ver";
+            }
+        }
+
         const campoData = document.getElementById('campo_data');
         const campoCPF = document.getElementById('campo_cpf');
+        const campoNome = document.getElementById('campo_nome');
+        const campoEmail = document.getElementById('campo_email');
         const campoSenha = document.getElementById('campo_senha');
         const campoConfirmarSenha = document.getElementById('campo_confirmar_senha');
         const formCadastro = document.getElementById('form_cadastro');
@@ -291,29 +444,27 @@
             }
 
             erroIdade.style.display = 'none';
-            campoData.style.borderColor = '#333333';
+            campoData.style.borderColor = '#262626';
         });
 
-        // Oculta erro de senha ao digitar
         campoConfirmarSenha.addEventListener('input', () => {
             erroSenha.style.display = 'none';
-            campoConfirmarSenha.style.borderColor = '#333333';
+            campoConfirmarSenha.style.borderColor = '#262626';
         });
 
         // Validações no Envio
         formCadastro.addEventListener('submit', (e) => {
-            let formValido = true;
+            e.preventDefault(); 
 
             // 1. Validação de Senhas
             if (campoSenha.value !== campoConfirmarSenha.value) {
-                e.preventDefault();
                 erroSenha.style.display = 'block';
-                campoConfirmarSenha.style.borderColor = '#ff3333';
+                campoConfirmarSenha.style.borderColor = '#ff4d4d';
                 campoConfirmarSenha.focus();
-                formValido = false;
+                return;
             }
 
-            // 2. Validação de Idade (Maior de 18) e Data Real
+            // 2. Validação de Idade (Maior de 18)
             const dataTexto = campoData.value;
             const partes = dataTexto.split('/');
 
@@ -329,11 +480,10 @@
                     dataNascimento.getMonth() !== mes ||
                     dataNascimento.getDate() !== dia
                 ) {
-                    e.preventDefault();
                     erroIdade.textContent = '🚫 Por favor, digite uma data válida.';
                     erroIdade.style.display = 'block';
-                    campoData.style.borderColor = '#ff3333';
-                    if (formValido) campoData.focus();
+                    campoData.style.borderColor = '#ff4d4d';
+                    campoData.focus();
                     return;
                 }
 
@@ -346,21 +496,28 @@
                 }
 
                 if (isNaN(idade) || idade < 18) {
-                    e.preventDefault();
                     erroIdade.textContent = '🚫 Você precisa ter 18 anos ou mais para se cadastrar.';
                     erroIdade.style.display = 'block';
-                    campoData.style.borderColor = '#ff3333';
-                    if (formValido) campoData.focus();
+                    campoData.style.borderColor = '#ff4d4d';
+                    campoData.focus();
+                    return;
                 }
             } else {
-                e.preventDefault();
                 erroIdade.textContent = '🚫 Por favor, digite uma data válida (DD/MM/AAAA).';
                 erroIdade.style.display = 'block';
-                campoData.style.borderColor = '#ff3333';
-                if (formValido) campoData.focus();
+                campoData.style.borderColor = '#ff4d4d';
+                campoData.focus();
+                return;
             }
+
+            // 3. Salva os dados e define o login ativo
+            localStorage.setItem('usuarioLogadoNome', campoNome.value);
+            localStorage.setItem('usuarioLogadoEmail', campoEmail.value);
+            localStorage.setItem('tarcisio_logado', 'true');
+
+            // Redireciona para o painel principal
+            window.location.href = "dashboard.html";
         });
     </script>
-
 </body>
 </html>
